@@ -2,26 +2,29 @@
   "name": "rdr-index-kit",
   "version": "0.0.0",
   "description": "Ranking Digital Rights Open Source Index Kit",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test-build": "npx babel-cli src --out-dir build",
+    "test-code": "npx jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rankingdigitalrights/index-kit.git"
   },
   "author": "rdr | fubits | gabywalton",
-  "license": "SEE LICENSE IN LICENSE.MD",
+  "license": "SEE LICENSE IN LICENSE.md",
   "bugs": {
     "url": "https://github.com/rankingdigitalrights/index-kit/issues"
   },
   "homepage": "https://github.com/rankingdigitalrights/index-kit#readme",
-  "dependencies": {
-    "eslint": "^7.15.0",
-    "@types/google-apps-script": "^1.0.10",
-    "clasp": "^1.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "eslint-plugin-googleappsscript": "^1.0.3"
+    "@types/google-apps-script": "^1.0.10",
+    "babel-cli": "^6.26.0",
+    "babel-preset-google-apps-script": "0.0.3",
+    "clasp": "^1.0.0",
+    "eslint": "^7.15.0",
+    "eslint-plugin-googleappsscript": "^1.0.3",
+    "jest": "^26.6.3"
   }
 }
