@@ -3,6 +3,7 @@ _build
 
 # CLASP
 .clasp.json
+.clasprc.json
 
 # Logs
 logs
