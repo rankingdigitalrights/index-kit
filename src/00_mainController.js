@@ -2,11 +2,11 @@ function mainInputSheets() {
 
     initiateGlobalConfig()
     filenameSuffix = "Dev" // Dev, "", Debug, QC
-    var mainSheetMode = "Input" // for filename
-    var useStepsSubset = false // true := use subset
-    var useIndicatorSubset = true // true := use subset
+    let mainSheetMode = "Input" // for filename
+    let useStepsSubset = false // true := use subset
+    let useIndicatorSubset = true // true := use subset
 
-    var Companies = companiesVector.companies
+    let Companies = companiesVector.companies
         .slice(0, 0) // on purpose to prevent script from running.
     // .slice(0,3) // Subset #1 0:2
     // .slice(3,6) // Subset #2 3:5
@@ -22,7 +22,7 @@ function mainInputSheets() {
     // .slice(7,8) // Twitter
     // .slice(8,9) // Vodafone
 
-    var fileID
+    let fileID
 
     Companies.forEach(function (Company) {
 
