@@ -5,34 +5,34 @@ function populateDCSheetByCategory(SS, thisIndCat, CompanyObj, ResearchStepsObj,
     // - name the Sheet
     // -
 
-    var thisIndCatLength = useIndicatorSubset ? 2 : thisIndCat.indicators.length
+    let thisIndCatLength = useIndicatorSubset ? 2 : thisIndCat.indicators.length
 
     // iterates over each indicator in the current type
     // for each indicator = distinct Sheet do
 
-    var lastRow
+    let lastRow
 
-    for (var i = 0; i < thisIndCatLength; i++) {
+    for (let i = 0; i < thisIndCatLength; i++) {
 
-        var thisInd = thisIndCat.indicators[i]
+        let thisInd = thisIndCat.indicators[i]
         Logger.log("indicator :" + thisInd.labelShort)
-        var thisIndScoringScope = thisInd.scoringScope
+        let thisIndScoringScope = thisInd.scoringScope
         Logger.log("Scoring Scope: " + thisInd.labelShort + " " + thisIndScoringScope)
 
-        var sheet = insertSheetIfNotExist(SS, thisInd.labelShort, false)
+        let sheet = insertSheetIfNotExist(SS, thisInd.labelShort, false)
 
         if (sheet === null) {
             continue
         } // skips this i if sheet already exists
 
         // checks whether this indicator has components. If yes then it is set to that number, else it is defaulted to 1
-        var nrOfIndSubComps = (thisIndCat.hasSubComponents == true) ? thisIndCat.components.length : 1
+        let nrOfIndSubComps = (thisIndCat.hasSubComponents == true) ? thisIndCat.components.length : 1
 
         // checks how many company group/opcom columns to hide for this Indicator
         // (based on Scoring Scope)
 
-        var bridgeCompColumnsNr = 2 // default:: no company columns
-        var bridgeOpCom
+        let bridgeCompColumnsNr = 2 // default:: no company columns
+        let bridgeOpCom
 
         if (thisInd.scoringScope == "full") {
             if (hasOpCom) {
@@ -48,9 +48,9 @@ function populateDCSheetByCategory(SS, thisIndCat, CompanyObj, ResearchStepsObj,
         // TODO: think about where to refactor to
         sheet.setColumnWidth(1, serviceColWidth)
 
-        var numberOfColumns = (companyNumberOfServices + 2) * nrOfIndSubComps + 1
+        let numberOfColumns = (companyNumberOfServices + 2) * nrOfIndSubComps + 1
 
-        var thisColWidth = serviceColWidth / nrOfIndSubComps
+        let thisColWidth = serviceColWidth / nrOfIndSubComps
 
         // if (CompanyObj.services.length == 1) {
         //     thisColWidth = serviceColWidth * 1.33
@@ -60,53 +60,53 @@ function populateDCSheetByCategory(SS, thisIndCat, CompanyObj, ResearchStepsObj,
 
 
         // start sheet in first top left cell
-        var activeRow = 1
-        var activeCol = 1
+        let activeRow = 1
+        let activeCol = 1
 
         // adds up indicator guidance
         activeRow = addIndicatorGuidance(sheet, thisIndCat, thisInd, activeRow, activeCol, nrOfIndSubComps, hasOpCom, numberOfColumns, bridgeCompColumnsNr, companyNumberOfServices, includeRGuidanceLink, collapseRGuidance)
 
         // --- // Begin Main Step-Wise Procedure // --- //
 
-        var dataStartRow = activeRow
+        let dataStartRow = activeRow
 
-        var mainStepsLength = ResearchStepsObj.researchSteps.length
+        let mainStepsLength = ResearchStepsObj.researchSteps.length
 
         // for each main step
-        for (var mainStepNr = 0; mainStepNr < mainStepsLength; mainStepNr++) {
+        for (let mainStepNr = 0; mainStepNr < mainStepsLength; mainStepNr++) {
 
-            var thisMainStep = ResearchStepsObj.researchSteps[mainStepNr]
-            var thisMainStepColor = thisMainStep.stepColor
+            let thisMainStep = ResearchStepsObj.researchSteps[mainStepNr]
+            let thisMainStepColor = thisMainStep.stepColor
             // setting up all the substeps for all the indicators
 
             Logger.log("main step : " + thisMainStep.step)
-            var subStepsLength = thisMainStep.substeps.length
+            let subStepsLength = thisMainStep.substeps.length
 
 
             activeRow = addMainStepHeader(sheet, thisIndCat, CompanyObj, activeRow, SS, nrOfIndSubComps, companyNumberOfServices, thisMainStep.step, thisMainStepColor) // sets up header
 
-            var beginStep = activeRow
-            var endStep = activeRow
+            let beginStep = activeRow
+            let endStep = activeRow
 
             // --- // Begin sub-Step-Wise Procedure // --- //
 
             // for each substep
-            for (var subStepNr = 0; subStepNr < subStepsLength; subStepNr++) {
+            for (let subStepNr = 0; subStepNr < subStepsLength; subStepNr++) {
 
-                var currentStep = thisMainStep.substeps[subStepNr]
+                let currentStep = thisMainStep.substeps[subStepNr]
                 Logger.log("substep : " + currentStep.labelShort)
 
-                var currentStepClength = currentStep.components.length
+                let currentStepClength = currentStep.components.length
 
                 // step-wise evaluate components of current research Step, execute the according building function and return the active row, which is then picked up by next building function
 
                 // stores first row of a step to use later in naming a step
-                var firstRow = activeRow + 1
+                let firstRow = activeRow + 1
 
                 // Begin step component procedure
-                for (var stepCNr = 0; stepCNr < currentStepClength; stepCNr++) {
+                for (let stepCNr = 0; stepCNr < currentStepClength; stepCNr++) {
 
-                    var thisStepComponent = currentStep.components[stepCNr].type
+                    let thisStepComponent = currentStep.components[stepCNr].type
 
                     Logger.log("step.component : " + currentStep.labelShort + " : " + thisStepComponent)
 
@@ -153,20 +153,20 @@ function populateDCSheetByCategory(SS, thisIndCat, CompanyObj, ResearchStepsObj,
 
                 lastRow = activeRow
 
-                var maxCol = 1 + (companyNumberOfServices + 2) * nrOfIndSubComps // calculates the max column
+                let maxCol = 1 + (companyNumberOfServices + 2) * nrOfIndSubComps // calculates the max column
 
                 // we don't want the researchers' names as part of the range
                 // so move firstRow by 1
-                var range = sheet.getRange(firstRow + 1, 2, lastRow - firstRow - 1, maxCol - 1)
+                let range = sheet.getRange(firstRow + 1, 2, lastRow - firstRow - 1, maxCol - 1)
 
                 // cell name formula; output defined in 44_rangeNamingHelper.js
                 const component = ""
-                var stepNamedRange = defineNamedRangeStringImport(indexPrefix, "DC", currentStep.subStepID, thisIndCat.indicators[i].labelShort, component, CompanyObj.id, "", "Step")
+                let stepNamedRange = defineNamedRangeStringImport(indexPrefix, "DC", currentStep.subStepID, thisIndCat.indicators[i].labelShort, component, CompanyObj.id, "", "Step")
 
                 SS.setNamedRange(stepNamedRange, range) // names an entire step
 
                 // GROUPING for substep
-                var substepRange = range.shiftRowGroupDepth(1)
+                let substepRange = range.shiftRowGroupDepth(1)
 
                 // COLLAPSE substep GROUP per researchSteps substep setting
                 if (!doCollapseAll) {
@@ -187,7 +187,7 @@ function populateDCSheetByCategory(SS, thisIndCat, CompanyObj, ResearchStepsObj,
             activeRow += 1
 
             // group whole step and make main step header row the anchor
-            var rangeStep = sheet.getRange(beginStep + 1, 1, endStep - beginStep - 1, numberOfColumns)
+            let rangeStep = sheet.getRange(beginStep + 1, 1, endStep - beginStep - 1, numberOfColumns)
             Logger.log("grouping whole step for range :" + rangeStep.getA1Notation())
             rangeStep.shiftRowGroupDepth(1)
 
@@ -195,27 +195,27 @@ function populateDCSheetByCategory(SS, thisIndCat, CompanyObj, ResearchStepsObj,
 
 
         // set font for whole data range
-        var sheetRange = sheet.getRange(dataStartRow, 1, lastRow, numberOfColumns)
+        let sheetRange = sheet.getRange(dataStartRow, 1, lastRow, numberOfColumns)
             .setFontFamily("Roboto")
             .setFontSize(10)
             .setWrap(true)
             .setVerticalAlignment("top")
 
-        var condRuleNames = SpreadsheetApp.newConditionalFormatRule()
+        let condRuleNames = SpreadsheetApp.newConditionalFormatRule()
             .whenTextEqualTo("Your Name")
             .setFontColor("#ea4335")
             .setBold(true)
             .setRanges([sheetRange])
             .build()
 
-        var condRuleValues = SpreadsheetApp.newConditionalFormatRule()
+        let condRuleValues = SpreadsheetApp.newConditionalFormatRule()
             .whenTextEqualTo("not selected")
             // .setFontColor('#ea4335')
             .setBackground("#f4cccc")
             .setRanges([sheetRange])
             .build()
 
-        var rules = sheet.getConditionalFormatRules()
+        let rules = sheet.getConditionalFormatRules()
         rules.push(condRuleNames)
         rules.push(condRuleValues)
         sheet.setConditionalFormatRules(rules)

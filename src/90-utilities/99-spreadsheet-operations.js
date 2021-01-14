@@ -6,7 +6,7 @@
 // Main Test Caller //
 
 function mainTestConnectionByName() {
-    var spreadsheetName = "verizon test"
+    let spreadsheetName = "verizon test"
     connectToSpreadsheetByName(spreadsheetName, false)
 }
 
@@ -21,9 +21,9 @@ function mainTestConnectionByID() {
 
 function connectToSpreadsheetByName(spreadsheetName, createNewFile) {
 
-    var Spreadsheets = DriveApp.getFilesByName(spreadsheetName)
+    let Spreadsheets = DriveApp.getFilesByName(spreadsheetName)
 
-    var Spreadsheet = null
+    let Spreadsheet = null
 
     // if SS doesn't exist
     // --- and createNewFile === true
@@ -39,9 +39,9 @@ function connectToSpreadsheetByName(spreadsheetName, createNewFile) {
         if (createNewFile) {
             Logger.log("--- --- START: creating " + spreadsheetName)
 
-            var folderID = createFolderIfNotExist(rootFolderID, outputFolderName)
+            let folderID = createFolderIfNotExist(rootFolderID, outputFolderName)
 
-            var resource = {
+            let resource = {
                 title: spreadsheetName,
                 mimeType: MimeType.GOOGLE_SHEETS,
                 parents: [{
@@ -50,9 +50,9 @@ function connectToSpreadsheetByName(spreadsheetName, createNewFile) {
             }
 
             // Logger.log(resource.parents.id)
-            var fileJson = Drive.Files.insert(resource)
+            let fileJson = Drive.Files.insert(resource)
 
-            var fileId = fileJson.id
+            let fileId = fileJson.id
             Logger.log("new Speadsheet fileID: " + fileId)
             Spreadsheet = connectToSpreadsheetByID(fileId)
 
@@ -64,7 +64,7 @@ function connectToSpreadsheetByName(spreadsheetName, createNewFile) {
 
         // while (Spreadsheet.hasNext()) { }
         // Nope. Only do for first Spreadsheet element
-        var thisSpreadsheet = Spreadsheets.next()
+        let thisSpreadsheet = Spreadsheets.next()
         Logger.log("File " + thisSpreadsheet.getName() + " exists")
         Logger.log("locally connected to: " + thisSpreadsheet.getName())
 
@@ -79,7 +79,7 @@ function connectToSpreadsheetByName(spreadsheetName, createNewFile) {
 
 function connectToSpreadsheetByID(ID) {
 
-    var thisSpreadsheet = SpreadsheetApp.openById(ID)
+    let thisSpreadsheet = SpreadsheetApp.openById(ID)
     Logger.log("locally connected to: " + thisSpreadsheet.getName())
     return thisSpreadsheet
 
@@ -89,7 +89,7 @@ function connectToSpreadsheetByID(ID) {
 // Help Function to overwrite Sheet in Spreadsheet if it is already existing
 
 function insertSheetIfNotExist(Spreadsheet, SheetName, updateSheet) {
-    var Sheet
+    let Sheet
     if (!Spreadsheet.getSheetByName(SheetName)) {
         Sheet = Spreadsheet.insertSheet(SheetName)
     } else {
@@ -135,9 +135,9 @@ function moveSheetToPos(Spreadsheet, Sheet, posInt) {
 
 function addFileIDtoControl(mode, companyShortName, fileID, controlSpreadsheetID) {
 
-    var spreadsheet = connectToSpreadsheetByID(controlSpreadsheetID)
-    var sheet = insertSheetIfNotExist(spreadsheet, mode, true)
-    var formula = "=HYPERLINK(CONCAT(\"https://docs.google.com/spreadsheets/d/\",INDIRECT(ADDRESS(ROW(),COLUMN()-1))),INDIRECT(ADDRESS(ROW(),COLUMN()-2)))"
+    let spreadsheet = connectToSpreadsheetByID(controlSpreadsheetID)
+    let sheet = insertSheetIfNotExist(spreadsheet, mode, true)
+    let formula = "=HYPERLINK(CONCAT(\"https://docs.google.com/spreadsheets/d/\",INDIRECT(ADDRESS(ROW(),COLUMN()-1))),INDIRECT(ADDRESS(ROW(),COLUMN()-2)))"
     sheet.appendRow([mode, companyShortName, fileID, formula])
     Logger.log("created" + fileID + "; added to Control")
 
@@ -145,7 +145,7 @@ function addFileIDtoControl(mode, companyShortName, fileID, controlSpreadsheetID
 
 function importRangeFormula(url, range, integrateOutputs) {
 
-    var formula
+    let formula
 
     if (integrateOutputs) {
         formula = "=" + range
@@ -157,7 +157,7 @@ function importRangeFormula(url, range, integrateOutputs) {
 }
 
 function getSheetByName(Spreadsheet, Sheetname) {
-    var Sheet
+    let Sheet
     if (!Spreadsheet.getSheetByName(Sheetname)) {
         Sheet = null
         Logger.log("Sheet " + Sheetname + " not found.")
@@ -168,7 +168,7 @@ function getSheetByName(Spreadsheet, Sheetname) {
 }
 
 function removeEmptySheet(SS) {
-    var emptySheet = SS.getSheetByName("Sheet1")
+    let emptySheet = SS.getSheetByName("Sheet1")
 
     if (emptySheet) {
         SS.deleteSheet(emptySheet)
@@ -176,8 +176,8 @@ function removeEmptySheet(SS) {
 }
 
 function resizeSheet(Sheet, newRows) {
-    var oldRows = Sheet.getMaxRows()
-    var rowDiff = newRows - oldRows
+    let oldRows = Sheet.getMaxRows()
+    let rowDiff = newRows - oldRows
     if (oldRows < newRows) {
         Sheet.insertRows(1, rowDiff)
     }

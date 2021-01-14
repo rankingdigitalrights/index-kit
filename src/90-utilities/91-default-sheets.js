@@ -2,10 +2,10 @@
 
 function fillSourceSheet(thisSheet) {
 
-    var webArchiveLink = "=HYPERLINK(\"https://archive.org/web/\", \"Internet Archive\")"
+    let webArchiveLink = "=HYPERLINK(\"https://archive.org/web/\", \"Internet Archive\")"
     thisSheet.appendRow(["Source\nreference\nnumber", "Document title", "URL", "Date of document\n(if applicable)\nYYYY-MM-DD", "Date accessed\nYYYY-MM-DD", "Saved source link", webArchiveLink, "Has this policy changed from the previous year's Index?"])
 
-    var lastCol = thisSheet.getLastColumn()
+    let lastCol = thisSheet.getLastColumn()
 
     thisSheet.getRange(1, 1, 1, lastCol)
         .setFontFamily("Roboto")
@@ -28,12 +28,12 @@ function fillSourceSheet(thisSheet) {
 
 function fillPrevOutcomeSheet(thisSheet, importedOutcomeTabName, externalFormula) {
     thisSheet.setName(importedOutcomeTabName)
-    var cell = thisSheet.getActiveCell()
+    let cell = thisSheet.getActiveCell()
     cell.setValue(externalFormula.toString())
 }
 
 function insertPointValidationSheet(SS, SheetName) {
-    var pointsSheet = insertSheetIfNotExist(SS, SheetName, true)
+    let pointsSheet = insertSheetIfNotExist(SS, SheetName, true)
     if (pointsSheet !== null) {
         pointsSheet.clear()
         fillPointsSheet(pointsSheet)
@@ -44,14 +44,14 @@ function insertPointValidationSheet(SS, SheetName) {
 
 function insertSheetConnector(SS, Companies) {
 
-    var Sheet = insertSheetIfNotExist(SS, "Connector", true)
+    let Sheet = insertSheetIfNotExist(SS, "Connector", true)
 
-    var companyCells = []
-    var companyName
-    var companyUrl
-    var formula
-    var formulaPrefix = "=IMPORTRANGE(\""
-    var formulaSuffix = "\", \"G1!B5\")"
+    let companyCells = []
+    let companyName
+    let companyUrl
+    let formula
+    let formulaPrefix = "=IMPORTRANGE(\""
+    let formulaSuffix = "\", \"G1!B5\")"
 
     Companies.forEach(function (company) {
         companyName = company.label.current
@@ -60,9 +60,9 @@ function insertSheetConnector(SS, Companies) {
         companyCells.push([companyName, formula])
     })
 
-    var arrayLength = companyCells.length
+    let arrayLength = companyCells.length
     if (arrayLength > 0) {
-        var column = Sheet.getRange(1, 1, arrayLength, 2)
+        let column = Sheet.getRange(1, 1, arrayLength, 2)
         column.setValues(companyCells)
     }
 

@@ -3,41 +3,41 @@
 function createSpreadsheetInput(useStepsSubset, useIndicatorSubset, CompanyObj, filenamePrefix, filenameSuffix, mainSheetMode) {
     Logger.log("--- // --- begin main data collection --- // ---")
 
-    var sourcesTabName = "Sources"
+    let sourcesTabName = "Sources"
 
-    var companyShortName = cleanCompanyName(CompanyObj)
+    let companyShortName = cleanCompanyName(CompanyObj)
 
     Logger.log("--- // --- creating " + mainSheetMode + " Spreadsheet for " + companyShortName + " --- // ---")
 
     // importing the JSON objects which contain the parameters
     // Refactored to fetching from Google Drive
 
-    var Config = centralConfig // var Config = importLocalJSON("Config")
-    // var CompanyObj = CompanyObj // TODO this a JSON Obj now; adapt in scope
-    var IndicatorsObj = indicatorsVector
-    var ResearchStepsObj = researchStepsVector
+    let Config = centralConfig // let Config = importLocalJSON("Config")
+    // let CompanyObj = CompanyObj // TODO this a JSON Obj now; adapt in scope
+    let IndicatorsObj = indicatorsVector
+    let ResearchStepsObj = researchStepsVector
 
-    var serviceColWidth = Config.serviceColWidth
-    var doCollapseAll = Config.collapseAllGroups
-    var integrateOutputs = Config.integrateOutputs
-    var importedOutcomeTabName = Config.prevYearOutcomeTab
-    var includeRGuidanceLink = Config.includeRGuidanceLink
-    var collapseRGuidance = Config.collapseRGuidance
+    let serviceColWidth = Config.serviceColWidth
+    let doCollapseAll = Config.collapseAllGroups
+    let integrateOutputs = Config.integrateOutputs
+    let importedOutcomeTabName = Config.prevYearOutcomeTab
+    let includeRGuidanceLink = Config.includeRGuidanceLink
+    let collapseRGuidance = Config.collapseRGuidance
 
 
     // connect to existing spreadsheet or creat a blank spreadsheet
-    var spreadsheetName = spreadSheetFileName(filenamePrefix, mainSheetMode, companyShortName, filenameSuffix)
+    let spreadsheetName = spreadSheetFileName(filenamePrefix, mainSheetMode, companyShortName, filenameSuffix)
 
-    var SS = connectToSpreadsheetByName(spreadsheetName, true)
+    let SS = connectToSpreadsheetByName(spreadsheetName, true)
 
-    var fileID = SS.getId()
+    let fileID = SS.getId()
     Logger.log("SS ID: " + fileID)
     // --- // add previous year's outcome sheet // --- //
 
     // Formula for importing previous year's outcome
-    var externalFormula = "=IMPORTRANGE(\"" + Config.prevIndexSSID + "\",\"" + CompanyObj.tabPrevYearsOutcome + "!" + "A:Z" + "\")"
+    let externalFormula = "=IMPORTRANGE(\"" + Config.prevIndexSSID + "\",\"" + CompanyObj.tabPrevYearsOutcome + "!" + "A:Z" + "\")"
 
-    var newSheet
+    let newSheet
 
     // if set in Config, import previous Index Outcome
     if (Config.YearOnYear) {
@@ -56,16 +56,16 @@ function createSpreadsheetInput(useStepsSubset, useIndicatorSubset, CompanyObj, 
 
     // if scoring sheet is integrated into DC, create Points sheet
 
-    var hasOpCom = CompanyObj.hasOpCom
+    let hasOpCom = CompanyObj.hasOpCom
 
     // fetch number of Services once
-    var companyNumberOfServices = CompanyObj.services.length
+    let companyNumberOfServices = CompanyObj.services.length
 
     // --- // MAIN TASK // --- //
     // for each Indicator Class do
-    var currentCat
+    let currentCat
 
-    for (var i = 0; i < IndicatorsObj.indicatorClasses.length; i++) {
+    for (let i = 0; i < IndicatorsObj.indicatorClasses.length; i++) {
 
         currentCat = IndicatorsObj.indicatorClasses[i]
 

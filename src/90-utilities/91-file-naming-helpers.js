@@ -2,14 +2,14 @@
 
 function spreadSheetFileName(filenamePrefix, mainSheetMode, mainFileNameElement, filenameSuffix) {
 
-    var filename = filenamePrefix + " " + mainFileNameElement + " - " + mainSheetMode + " " + filenameSuffix
+    let filename = filenamePrefix + " " + mainFileNameElement + " - " + mainSheetMode + " " + filenameSuffix
 
     return filename
 }
 
 function cleanCompanyName(Company) {
     
-    var companyName
+    let companyName
     if (Company.label.altFilename) {
         companyName = Company.label.altFilename
     } else {
