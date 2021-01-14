@@ -1,4 +1,4 @@
-var indicatorsVector = {
+let indicatorsVector = {
     "indicatorClasses": [{
             "labelShort": "G",
             "labelLong": "Governance",

@@ -1,4 +1,4 @@
-var researchStepsVector = {
+let researchStepsVector = {
     "researchSteps": [{
             "step": 1,
             "stepColor": "#ddd9c3",

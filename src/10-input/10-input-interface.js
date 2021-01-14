@@ -79,48 +79,7 @@ function createSpreadsheetInput(useStepsSubset, useIndicatorSubset, CompanyObj, 
 
     Logger.log("end DC main")
 
-    // --- // additional integrated Outputs // --- //
-
-    if (integrateOutputs) {
-        Logger.log("Adding Extra Sheets (Scoring / Feedback / Notes")
-
-        // fetch params
-        var isPilotMode = Config.integrateOutputsArray.isPilotMode
-        var includeNotes = Config.integrateOutputsArray.includeNotes
-        var includeScoring = Config.integrateOutputsArray.includeScoring
-        var hasFullScores = Config.integrateOutputsArray.isFullScoring
-
-        var sheetModeID = "SC"
-
-        var outputParams
-
-        if (includeScoring) {
-
-            Logger.log("Extra Sheet --- Scores --- adding")
-
-            // Scoring Scheme / Validation
-            var pointsSheet = insertPointValidationSheet(SS, "Points")
-
-            outputParams = Config.integrateOutputsArray.scoringParams
-            isPilotMode = false
-            addSetOfScoringSteps(SS, sheetModeID, Config, IndicatorsObj, ResearchStepsObj, CompanyObj, hasOpCom, useIndicatorSubset, integrateOutputs, outputParams, isPilotMode)
-
-            Logger.log("Extra Sheet --- Scores --- added")
-
-            moveHideSheetifExists(SS, pointsSheet, 1)
-
-        }
-
-        if (includeNotes) {
-            Logger.log("Extra Sheet --- Researcher Feedback --- adding")
-            outputParams = Config.integrateOutputsArray.researchNotesParams
-
-            addSetOfScoringSteps(SS, sheetModeID, Config, IndicatorsObj, ResearchStepsObj, CompanyObj, hasOpCom, useIndicatorSubset, integrateOutputs, outputParams, isPilotMode)
-
-            Logger.log("Extra Sheet --- Researcher Feedback --- added")
-        }
-    }
-
+   
     // clean up //
     // if empty Sheet exists, delete
     removeEmptySheet(SS)
