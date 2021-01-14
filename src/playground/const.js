@@ -1,3 +1,4 @@
+/*
 const thisObject = {};
 
 // thisObject = {key: "a"} won't work
@@ -8,3 +9,4 @@ thisObject.key = "a";
 thisObject.key = "b";
 
 console.log(thisObject);
+*/

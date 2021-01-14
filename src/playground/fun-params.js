@@ -1,3 +1,4 @@
+/*
 function printLetters(a, b, { c = "x", d, e }) {
   console.log(a);
   console.log(b);
@@ -7,3 +8,4 @@ function printLetters(a, b, { c = "x", d, e }) {
 }
 
 printLetters("a", "b", { d: "d", e: "e" });
+*/
