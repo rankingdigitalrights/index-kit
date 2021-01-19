@@ -1,6 +1,6 @@
 // --- Spreadsheet Casting: Company Data Collection Sheet --- //
 
-function createSpreadsheetInput(useStepsSubset, useIndicatorSubset, CompanyObj, filenamePrefix, filenameSuffix, mainSheetMode) {
+function createSpreadsheetInput(useStepsSubset=false, useIndicatorSubset=false, CompanyObj, filenamePrefix, filenameSuffix, mainSheetMode="Input") {
     Logger.log("--- // --- begin main data collection --- // ---")
 
     let sourcesTabName = "Sources"
