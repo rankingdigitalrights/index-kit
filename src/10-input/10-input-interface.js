@@ -1,5 +1,9 @@
 // --- Spreadsheet Casting: Company Data Collection Sheet --- //
 
+
+/* function starts creating a spreadsheet for a single company and populates it
+ by calling populateDCbyCategory()*/
+ 
 function createSpreadsheetInput(useStepsSubset=false, useIndicatorSubset=false, CompanyObj, filenamePrefix, filenameSuffix, mainSheetMode="Input") {
     Logger.log("--- // --- begin main data collection --- // ---")
 

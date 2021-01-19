@@ -1,3 +1,8 @@
+
+/* this function creates input sheets for specified companies in the designated
+ output folder by calling createSpreadsheetInput() and adds the sheets to the control sheet by calling addFileIDtoControl()*/
+
+
 function mainInputSheets() {
 
     initiateGlobalConfig()
