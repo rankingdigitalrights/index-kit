@@ -1,4 +1,4 @@
-function populateDCSheetByCategory(SS, thisIndCat, CompanyObj, ResearchStepsObj, companyNumberOfServices, serviceColWidth, hasOpCom, doCollapseAll, includeRGuidanceLink, collapseRGuidance, useIndicatorSubset) {
+function populateDCSheetByCategory(SS, thisIndCat, CompanyObj, ResearchStepsObj, companyNumberOfServices, serviceColWidth, hasOpCom, doCollapseAll, includeRGuidanceLink=false, collapseRGuidance=false, useIndicatorSubset=false) {
 
     // for each indicator
     // - create a new Sheet
