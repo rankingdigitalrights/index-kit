@@ -1,93 +1,126 @@
 // --- Spreadsheet Casting: Company Data Collection Sheet --- //
 
+/* function starts creating a spreadsheet for a single company and populates it by calling populateDCbyCategory()*/
 
-/* function starts creating a spreadsheet for a single company and populates it
- by calling populateDCbyCategory()*/
- 
-function createSpreadsheetInput(useStepsSubset=false, useIndicatorSubset=false, CompanyObj, filenamePrefix, filenameSuffix, mainSheetMode="Input") {
-    Logger.log("--- // --- begin main data collection --- // ---")
+function createSpreadsheetInput({
+  useIndicatorSubset = false,
+  Company,
+  filenamePrefix,
+  filenameSuffix,
+  mainSheetMode = "Input",
+}) {
+  Logger.log("--- // --- begin main data collection --- // ---");
 
-    let sourcesTabName = "Sources"
+  let sourcesTabName = "Sources";
 
-    let companyShortName = cleanCompanyName(CompanyObj)
+  let companyShortName = cleanCompanyName(Company);
 
-    Logger.log("--- // --- creating " + mainSheetMode + " Spreadsheet for " + companyShortName + " --- // ---")
+  Logger.log(
+    "--- // --- creating " +
+      mainSheetMode +
+      " Spreadsheet for " +
+      companyShortName +
+      " --- // ---"
+  );
 
-    // importing the JSON objects which contain the parameters
-    // Refactored to fetching from Google Drive
+  // importing the JSON objects which contain the parameters
+  // Refactored to fetching from Google Drive
 
-    let Config = centralConfig // let Config = importLocalJSON("Config")
-    // let CompanyObj = CompanyObj // TODO this a JSON Obj now; adapt in scope
-    let IndicatorsObj = indicatorsVector
-    let ResearchStepsObj = researchStepsVector
+  let Config = centralConfig; // let Config = importLocalJSON("Config")
+  // let Company = Company // TODO this a JSON Obj now; adapt in scope
+  let Indicators = indicatorsVector;
+  let ResearchStepsObj = researchStepsVector;
 
-    let serviceColWidth = Config.serviceColWidth
-    let doCollapseAll = Config.collapseAllGroups
-    let integrateOutputs = Config.integrateOutputs
-    let importedOutcomeTabName = Config.prevYearOutcomeTab
-    let includeRGuidanceLink = Config.includeRGuidanceLink
-    let collapseRGuidance = Config.collapseRGuidance
+  let serviceColWidth = Config.serviceColWidth;
+  let doCollapseAll = Config.collapseAllGroups;
+  let integrateOutputs = Config.integrateOutputs;
+  let importedOutcomeTabName = Config.prevYearOutcomeTab;
+  let includeRGuidanceLink = Config.includeRGuidanceLink;
+  let collapseRGuidance = Config.collapseRGuidance;
 
+  // connect to existing spreadsheet or creat a blank spreadsheet
+  let spreadsheetName = spreadSheetFileName(
+    filenamePrefix,
+    mainSheetMode,
+    companyShortName,
+    filenameSuffix
+  );
 
-    // connect to existing spreadsheet or creat a blank spreadsheet
-    let spreadsheetName = spreadSheetFileName(filenamePrefix, mainSheetMode, companyShortName, filenameSuffix)
+  let SS = connectToSpreadsheetByName(spreadsheetName, true);
 
-    let SS = connectToSpreadsheetByName(spreadsheetName, true)
+  let fileID = SS.getId();
+  Logger.log("SS ID: " + fileID);
+  // --- // add previous year's outcome sheet // --- //
 
-    let fileID = SS.getId()
-    Logger.log("SS ID: " + fileID)
-    // --- // add previous year's outcome sheet // --- //
+  // Formula for importing previous year's outcome
+  let externalFormula =
+    '=IMPORTRANGE("' +
+    Config.prevIndexSSID +
+    '","' +
+    Company.tabPrevYearsOutcome +
+    "!" +
+    "A:Z" +
+    '")';
 
-    // Formula for importing previous year's outcome
-    let externalFormula = "=IMPORTRANGE(\"" + Config.prevIndexSSID + "\",\"" + CompanyObj.tabPrevYearsOutcome + "!" + "A:Z" + "\")"
+  let newSheet;
 
-    let newSheet
-
-    // if set in Config, import previous Index Outcome
-    if (Config.YearOnYear) {
-        newSheet = insertSheetIfNotExist(SS, importedOutcomeTabName, false)
-        if (newSheet !== null) {
-            fillPrevOutcomeSheet(newSheet, importedOutcomeTabName, externalFormula)
-        }
-    }
-
-    // --- // creates sources page // --- //
-
-    newSheet = insertSheetIfNotExist(SS, sourcesTabName, false)
+  // if set in Config, import previous Index Outcome
+  if (Config.YearOnYear) {
+    newSheet = insertSheetIfNotExist(SS, importedOutcomeTabName, false);
     if (newSheet !== null) {
-        fillSourceSheet(newSheet)
+      fillPrevOutcomeSheet(newSheet, importedOutcomeTabName, externalFormula);
     }
+  }
 
-    // if scoring sheet is integrated into DC, create Points sheet
+  // --- // creates sources page // --- //
 
-    let hasOpCom = CompanyObj.hasOpCom
+  newSheet = insertSheetIfNotExist(SS, sourcesTabName, false);
+  if (newSheet !== null) {
+    fillSourceSheet(newSheet);
+  }
 
-    // fetch number of Services once
-    let companyNumberOfServices = CompanyObj.services.length
+  // if scoring sheet is integrated into DC, create Points sheet
 
-    // --- // MAIN TASK // --- //
-    // for each Indicator Class do
-    let currentCat
+  let hasOpCom = Company.hasOpCom;
 
-    for (let i = 0; i < IndicatorsObj.indicatorClasses.length; i++) {
+  // fetch number of Services once
+  let companyNumberOfServices = Company.services.length;
 
-        currentCat = IndicatorsObj.indicatorClasses[i]
+  // --- // MAIN TASK // --- //
+  // for each Indicator Class do
+  let currentCat;
 
-        Logger.log("Starting " + currentCat.labelLong)
-        Logger.log("Passing over " + ResearchStepsObj.researchSteps.length + " Steps")
+  for (let i = 0; i < Indicators.indicatorClasses.length; i++) {
+    currentCat = Indicators.indicatorClasses[i];
 
-        populateDCSheetByCategory(SS, currentCat, CompanyObj, ResearchStepsObj, companyNumberOfServices, serviceColWidth, hasOpCom, doCollapseAll, includeRGuidanceLink, collapseRGuidance, useIndicatorSubset)
+    Logger.log("Starting " + currentCat.labelLong);
+    Logger.log(
+      "Passing over " + ResearchStepsObj.researchSteps.length + " Steps"
+    );
 
-        Logger.log("Completed " + currentCat.labelLong)
-    }
+    populateDCSheetByCategory(
+      SS,
+      currentCat,
+      Company,
+      ResearchStepsObj,
+      companyNumberOfServices,
+      serviceColWidth,
+      hasOpCom,
+      doCollapseAll,
+      includeRGuidanceLink,
+      collapseRGuidance,
+      useIndicatorSubset
+    );
 
-    Logger.log("end DC main")
+    Logger.log("Completed " + currentCat.labelLong);
+  }
 
-   
-    // clean up //
-    // if empty Sheet exists, delete
-    removeEmptySheet(SS)
+  Logger.log("end DC main");
 
-    Logger.log(mainSheetMode + " Spreadsheet created for " + companyShortName)
-    return fileID
+  // clean up //
+  // if empty Sheet exists, delete
+  removeEmptySheet(SS);
+
+  Logger.log(mainSheetMode + " Spreadsheet created for " + companyShortName);
+  return fileID;
 }
