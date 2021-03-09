@@ -17,7 +17,7 @@ function populateDCSheetByCategory(
   // - name the Sheet
   // -
 
-  let thisIndCatLength = useIndicatorSubset ? 2 : thisIndCat.indicators.length;
+  let thisIndCatLength = useIndicatorSubset ? 2 : thisIndCat.indicators.length; // TODO
 
   // iterates over each indicator in the current type
   // for each indicator = distinct Sheet do
