@@ -1,4 +1,5 @@
 // search Folder and create a new one if needed
+//"use strict"
 
 function createFolderIfNotExist(ParentFolderID, FolderName) {
     let Parent = DriveApp.getFolderById(ParentFolderID)

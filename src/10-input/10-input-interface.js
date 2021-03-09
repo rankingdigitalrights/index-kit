@@ -2,6 +2,8 @@
 
 /* function starts creating a spreadsheet for a single company and populates it by calling populateDCbyCategory()*/
 
+//"use strict"
+
 function createSpreadsheetInput({
   useIndicatorSubset = false,
   Company,

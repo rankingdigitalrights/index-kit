@@ -3,6 +3,8 @@
 // Connect by Spreadsheet name //
 // Universal Method: Connect to Spreadsheet File and return Obj as open Spreadsheet
 
+//"use strict"
+
 // Main Test Caller //
 
 function mainTestConnectionByName() {

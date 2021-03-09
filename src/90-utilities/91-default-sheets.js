@@ -1,4 +1,5 @@
 // --- // creates sources page // --- //
+//"use strict"
 
 function fillSourceSheet(thisSheet) {
 

@@ -4,6 +4,8 @@
 
 // RDR2019DC S01 G1 iVM1 Step
 
+//"use strict"
+
 function defineNamedRangeStringImport(index, sheetModeID, step, indicatorElement, component, companyId, service, suffix) {
 
     let compCellName = index + sheetModeID + step + indicatorElement

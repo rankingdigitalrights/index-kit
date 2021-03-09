@@ -1,4 +1,5 @@
 // --- // central File naming logic // --- //
+//"use strict"
 
 function spreadSheetFileName(filenamePrefix, mainSheetMode, mainFileNameElement, filenameSuffix) {
 

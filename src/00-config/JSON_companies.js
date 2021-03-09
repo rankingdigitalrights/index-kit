@@ -1,6 +1,8 @@
 // please refer to naming conventions
 // https://github.com/rankingdigitalrights/datalab/blob/pilot-fork/clasp-proj/docs/dictionary.MD
 
+//"use strict"
+
 let companiesVector = {
     "collection": "companies",
     "indexYear": 2019,

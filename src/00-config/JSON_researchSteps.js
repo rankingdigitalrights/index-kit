@@ -1,3 +1,4 @@
+//"use strict"
 let researchStepsVector = {
     "researchSteps": [{
             "step": 1,

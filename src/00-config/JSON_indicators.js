@@ -1,3 +1,4 @@
+//"use strict"
 let indicatorsVector = {
     "indicatorClasses": [{
             "labelShort": "G",

@@ -1,3 +1,4 @@
+//"use strict"
 let centralConfig = {
     "indexPrefix": "RDR19P",
     "filenameSuffix": "Pilot Dev",

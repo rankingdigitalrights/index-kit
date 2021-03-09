@@ -1,9 +1,11 @@
 /* this function creates input sheets for specified companies in the designated
  output folder by calling createSpreadsheetInput() and adds the sheets to the control sheet by calling addFileIDtoControl()*/
 
+ //"use strict"
+
 function mainInputSheets() {
   initiateGlobalConfig();
-  filenameSuffix = "Dev"; // Dev, "", Debug, QC
+  filenameSuffix = "Dev Index Kit"; // Dev, "", Debug, QC
   let mainSheetMode = "Input"; // for filename
   let useIndicatorSubset = true; // true := use subset
 

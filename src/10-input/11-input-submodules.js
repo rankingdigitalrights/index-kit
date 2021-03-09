@@ -1,7 +1,7 @@
 // --- // Top-Level Headings // --- //
 
 // Indicator Guidance for researchers
-
+//"use strict"
 function addIndicatorGuidance(
   sheet,
   thisIndicator,
