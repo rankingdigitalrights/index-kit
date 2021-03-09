@@ -28,11 +28,12 @@ function createSpreadsheetInput({
   // importing the JSON objects which contain the parameters
   // Refactored to fetching from Google Drive
 
+  // json objects
   let Config = centralConfig; // let Config = importLocalJSON("Config")
-  // let Company = Company // TODO this a JSON Obj now; adapt in scope
   let Indicators = indicatorsVector;
   let ResearchStepsObj = researchStepsVector;
 
+  // config information
   let serviceColWidth = Config.serviceColWidth;
   let doCollapseAll = Config.collapseAllGroups;
   let integrateOutputs = Config.integrateOutputs;
