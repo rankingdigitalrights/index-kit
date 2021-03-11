@@ -17,7 +17,7 @@ function populateDCSheetByCategory(
   // - name the Sheet
   // -
 
-  let thisIndCatLength = useIndicatorSubset ? 2 : thisIndCat.indicators.length; // TODO
+  let thisIndCatLength = thisIndCat.indicators.length; 
 
   // iterates over each indicator in the current type
   // for each indicator = distinct Sheet do
@@ -39,8 +39,6 @@ function populateDCSheetByCategory(
     } // skips this i if sheet already exists
 
     // checks whether this indicator has components. If yes then it is set to that number, else it is defaulted to 1
-    let nrOfIndSubComps =
-      thisIndCat.hasSubComponents == true ? thisIndCat.components.length : 1;
 
     // checks how many company group/opcom columns to hide for this Indicator
     // (based on Scoring Scope)
@@ -62,9 +60,9 @@ function populateDCSheetByCategory(
     // TODO: think about where to refactor to
     sheet.setColumnWidth(1, serviceColWidth);
 
-    let numberOfColumns = (companyNumberOfServices + 2) * nrOfIndSubComps + 1;
+    let numberOfColumns = (companyNumberOfServices + 2) + 1;
 
-    let thisColWidth = serviceColWidth / nrOfIndSubComps;
+    let thisColWidth = serviceColWidth;
 
     // if (CompanyObj.services.length == 1) {
     //     thisColWidth = serviceColWidth * 1.33
@@ -82,7 +80,6 @@ function populateDCSheetByCategory(
       thisInd,
       activeRow,
       activeCol,
-      nrOfIndSubComps,
       hasOpCom,
       numberOfColumns,
       bridgeCompColumnsNr,
@@ -112,7 +109,6 @@ function populateDCSheetByCategory(
         CompanyObj,
         activeRow,
         SS,
-        nrOfIndSubComps,
         companyNumberOfServices,
         thisMainStep.step,
         thisMainStepColor
@@ -158,7 +154,6 @@ function populateDCSheetByCategory(
                 SS,
                 currentStep,
                 stepCNr,
-                nrOfIndSubComps,
                 thisIndCat,
                 companyNumberOfServices
               );
@@ -173,7 +168,6 @@ function populateDCSheetByCategory(
                 SS,
                 currentStep,
                 stepCNr,
-                nrOfIndSubComps,
                 thisIndCat,
                 companyNumberOfServices
               );
@@ -188,7 +182,6 @@ function populateDCSheetByCategory(
                 SS,
                 currentStep,
                 stepCNr,
-                nrOfIndSubComps,
                 thisIndCat,
                 companyNumberOfServices
               );
@@ -203,7 +196,6 @@ function populateDCSheetByCategory(
                 SS,
                 currentStep,
                 stepCNr,
-                nrOfIndSubComps,
                 thisIndCat,
                 companyNumberOfServices
               );
@@ -218,7 +210,6 @@ function populateDCSheetByCategory(
                 SS,
                 currentStep,
                 stepCNr,
-                nrOfIndSubComps,
                 thisIndCat,
                 companyNumberOfServices
               );
@@ -242,7 +233,6 @@ function populateDCSheetByCategory(
                 activeRow,
                 currentStep,
                 stepCNr,
-                nrOfIndSubComps,
                 thisIndCat,
                 companyNumberOfServices
               );
@@ -259,7 +249,7 @@ function populateDCSheetByCategory(
 
         lastRow = activeRow;
 
-        let maxCol = 1 + (companyNumberOfServices + 2) * nrOfIndSubComps; // calculates the max column
+        let maxCol = 1 + (companyNumberOfServices + 2); // calculates the max column
 
         // we don't want the researchers' names as part of the range
         // so move firstRow by 1

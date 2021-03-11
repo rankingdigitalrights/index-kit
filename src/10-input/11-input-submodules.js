@@ -7,7 +7,6 @@ function addIndicatorGuidance(
   thisIndicator,
   activeRow,
   activeCol,
-  nrOfIndSubComps,
   hasOpCom,
   numberOfColumns,
   bridgeCompColumnsNr,
@@ -21,7 +20,7 @@ function addIndicatorGuidance(
   let col = activeCol;
   let cell;
 
-  let maxColHeadings = (2 + bridgeCompColumnsNr) * nrOfIndSubComps + 1;
+  let maxColHeadings = (2 + bridgeCompColumnsNr) + 1;
   if (companyNumberOfServices == 1 && !hasOpCom) {
     maxColHeadings -= 1;
   }
@@ -161,7 +160,6 @@ function addMainStepHeader(
   CompanyObj,
   activeRow,
   SS,
-  nrOfIndSubComps,
   companyNumberOfServices,
   thisMainStepNr,
   mainStepColor
@@ -185,7 +183,7 @@ function addMainStepHeader(
   activeCol += 1;
 
   // Company (group) column(s)
-  for (let i = 0; i < nrOfIndSubComps; i++) {
+  for (let i = 0; i < 1; i++) {
     let cell = sheet
       .getRange(activeRow, activeCol)
       .setValue(CompanyObj.groupLabel)
@@ -201,12 +199,12 @@ function addMainStepHeader(
     }
 
     activeCol += 1;
-  } // close nrOfIndSubComps for loop
+  }
 
   // setting up OpComCompany regardless of whether it has one
   // will just hide the column if it doesn't exist
 
-  for (let i = 0; i < nrOfIndSubComps; i++) {
+  for (let i = 0; i < 1; i++) {
     let cell = sheet
       .getRange(activeRow, activeCol)
       .setValue(CompanyObj.opComLabel)
@@ -232,7 +230,7 @@ function addMainStepHeader(
 
   // for remaining columns (services)
   for (let i = 0; i < companyNumberOfServices; i++) {
-    for (let k = 0; k < nrOfIndSubComps; k++) {
+    for (let k = 0; k < 1; k++) {
       let cell = sheet
         .getRange(activeRow, activeCol)
         .setValue(CompanyObj.services[i].label.current)
@@ -292,7 +290,6 @@ function addSubStepHeader(
   SS,
   currentStep,
   stepCNr,
-  nrOfIndSubComps,
   currentClass,
   companyNumberOfServices
 ) {
@@ -308,11 +305,11 @@ function addSubStepHeader(
   // cell = textUnderline(cell)
 
   // TODO
-  // activeRow = addMainStepHeader(sheet, currentClass, CompanyObj, activeRow, SS, nrOfIndSubComps, companyNumberOfServices) // sets up header
+  // activeRow = addMainStepHeader(sheet, currentClass, CompanyObj, activeRow, SS, companyNumberOfServices) // sets up header
 
   let thisFiller = currentStep.components[stepCNr].placeholderText;
   let thisFirstCol = 2;
-  let thisLastCol = (companyNumberOfServices + 2) * nrOfIndSubComps;
+  let thisLastCol = (companyNumberOfServices + 2);
   // for remaining company, opCom, and services columns it adds the placeholderText
   let thisRange = sheet.getRange(activeRow, thisFirstCol, 1, thisLastCol);
   thisRange.setValue(thisFiller);
@@ -335,15 +332,12 @@ function addSubStepHeader(
 
     if (serviceNr == 1) {
       // main company
-      for (let k = 0; k < nrOfIndSubComps; k++) {
+      for (let k = 0; k < 1; k++) {
         thisCell = sheet.getRange(activeRow, 1 + serviceNr + k);
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
 
         component = "";
-        if (nrOfIndSubComps != 1) {
-          component = currentClass.components[k].labelShort;
-        }
 
         cellName = defineNamedRangeStringImport(
           indexPrefix,
@@ -361,15 +355,12 @@ function addSubStepHeader(
       }
     } else if (serviceNr == 2) {
       // opCom
-      for (let k = 0; k < nrOfIndSubComps; k++) {
-        thisCell = sheet.getRange(activeRow, 1 + nrOfIndSubComps + k);
+      for (let k = 0; k < 1; k++) {
+        thisCell = sheet.getRange(activeRow, 2 + k);
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
 
         component = "";
-        if (nrOfIndSubComps != 1) {
-          component = currentClass.components[k].labelShort;
-        }
 
         cellName = defineNamedRangeStringImport(
           indexPrefix,
@@ -387,7 +378,7 @@ function addSubStepHeader(
       }
     } else {
       // services
-      for (let k = 0; k < nrOfIndSubComps; k++) {
+      for (let k = 0; k < 1 ; k++) {
         thisCell = sheet.getRange(activeRow, activeCol);
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
@@ -395,9 +386,6 @@ function addSubStepHeader(
         let g = serviceNr - 3; // helper for Services
 
         component = "";
-        if (nrOfIndSubComps != 1) {
-          component = currentClass.components[k].labelShort;
-        }
 
         cellName = defineNamedRangeStringImport(
           indexPrefix,
@@ -428,7 +416,6 @@ function addEvaluationDropdown(
   SS,
   currentStep,
   stepCNr,
-  nrOfIndSubComps,
   currentClass,
   companyNumberOfServices
 ) {
@@ -462,15 +449,12 @@ function addEvaluationDropdown(
       // creates column(s) for overall company
       if (serviceNr == 1) {
         // loops through the number of components
-        for (let k = 0; k < nrOfIndSubComps; k++) {
+        for (let k = 0; k < 1; k++) {
           let thisCell = sheet.getRange(activeRow + elemNr, activeCol);
 
           // cell name formula; output defined in 44_rangeNamingHelper.js
 
           let component = "";
-          if (nrOfIndSubComps != 1) {
-            component = currentClass.components[k].labelShort;
-          }
 
           let cellName = defineNamedRangeStringImport(
             indexPrefix,
@@ -495,15 +479,12 @@ function addEvaluationDropdown(
       // setting up opCom column(s)
       else if (serviceNr == 2) {
         // loops through the number of components
-        for (let k = 0; k < nrOfIndSubComps; k++) {
+        for (let k = 0; k < 1; k++) {
           let thisCell = sheet.getRange(activeRow + elemNr, activeCol);
 
           // cell name formula; output defined in 44_rangeNamingHelper.js
 
           let component = "";
-          if (nrOfIndSubComps != 1) {
-            component = currentClass.components[k].labelShort;
-          }
 
           let cellName = defineNamedRangeStringImport(
             indexPrefix,
@@ -532,7 +513,7 @@ function addEvaluationDropdown(
 
       // creating all the service columns
       else {
-        for (let k = 0; k < nrOfIndSubComps; k++) {
+        for (let k = 0; k < 1; k++) {
           let thisCell = sheet.getRange(activeRow + elemNr, activeCol);
 
           // cell name formula; output defined in 44_rangeNamingHelper.js
@@ -540,9 +521,6 @@ function addEvaluationDropdown(
           let g = serviceNr - 3; // helper for Services
 
           let component = "";
-          if (nrOfIndSubComps != 1) {
-            component = currentClass.components[k].labelShort;
-          }
 
           let cellName = defineNamedRangeStringImport(
             indexPrefix,
@@ -580,7 +558,6 @@ function addComments(
   SS,
   currentStep,
   stepCNr,
-  nrOfIndSubComps,
   currentClass,
   companyNumberOfServices
 ) {
@@ -612,15 +589,12 @@ function addComments(
       // setting up the columns for the overall company
       if (serviceNr == 1) {
         // looping through the number of components
-        for (let k = 0; k < nrOfIndSubComps; k++) {
+        for (let k = 0; k < 1; k++) {
           let thisCell = sheet.getRange(activeRow + elemNr, activeCol);
 
           // cell name formula; output defined in 44_rangeNamingHelper.js
 
           let component = "";
-          if (nrOfIndSubComps != 1) {
-            component = currentClass.components[k].labelShort;
-          }
 
           let cellName = defineNamedRangeStringImport(
             indexPrefix,
@@ -641,15 +615,12 @@ function addComments(
       // setting up opCom column(s)
       else if (serviceNr == 2) {
         // looping through the number of components
-        for (let k = 0; k < nrOfIndSubComps; k++) {
+        for (let k = 0; k < 1; k++) {
           let thisCell = sheet.getRange(activeRow + elemNr, activeCol);
 
           // cell name formula; output defined in 44_rangeNamingHelper.js
 
           let component = "";
-          if (nrOfIndSubComps != 1) {
-            component = currentClass.components[k].labelShort;
-          }
 
           let cellName = defineNamedRangeStringImport(
             indexPrefix,
@@ -669,7 +640,7 @@ function addComments(
 
       // setting up columns for all the services
       else {
-        for (let k = 0; k < nrOfIndSubComps; k++) {
+        for (let k = 0; k < 1; k++) {
           thisCell = sheet.getRange(activeRow + elemNr, activeCol);
 
           // cell name formula; output defined in 44_rangeNamingHelper.js
@@ -677,9 +648,6 @@ function addComments(
           let g = serviceNr - 3; // helper for Services
 
           let component = "";
-          if (nrOfIndSubComps != 1) {
-            component = currentClass.components[k].labelShort;
-          }
 
           let cellName = defineNamedRangeStringImport(
             indexPrefix,
@@ -713,7 +681,6 @@ function addBinaryEvaluation(
   SS,
   currentStep,
   stepCNr,
-  nrOfIndSubComps,
   currentClass,
   companyNumberOfServices
 ) {
@@ -742,20 +709,16 @@ function addBinaryEvaluation(
     serviceNr < companyNumberOfServices + 3;
     serviceNr++
   ) {
-    // (((companyNumberOfServices+2)*nrOfIndSubComps)+1)
 
     // names the cells into which answers will be put
     if (serviceNr == 1) {
       // overall company
-      for (let k = 0; k < nrOfIndSubComps; k++) {
+      for (let k = 0; k < 1; k++) {
         let thisCell = sheet.getRange(activeRow, activeCol);
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
 
         let component = "";
-        if (nrOfIndSubComps != 1) {
-          component = currentClass.components[k].labelShort;
-        }
 
         let cellName = defineNamedRangeStringImport(
           indexPrefix,
@@ -779,15 +742,12 @@ function addBinaryEvaluation(
 
     // setting up the opCom row
     else if (serviceNr == 2) {
-      for (let k = 0; k < nrOfIndSubComps; k++) {
+      for (let k = 0; k < 1; k++) {
         let thisCell = sheet.getRange(activeRow, activeCol);
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
 
         let component = "";
-        if (nrOfIndSubComps != 1) {
-          component = currentClass.components[k].labelShort;
-        }
 
         let cellName = defineNamedRangeStringImport(
           indexPrefix,
@@ -811,16 +771,13 @@ function addBinaryEvaluation(
 
     // taking care of all the service columns
     else {
-      for (let k = 0; k < nrOfIndSubComps; k++) {
+      for (let k = 0; k < 1; k++) {
         let thisCell = sheet.getRange(activeRow, activeCol);
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
 
         let g = serviceNr - 3;
         let component = "";
-        if (nrOfIndSubComps != 1) {
-          component = currentClass.components[k].labelShort;
-        }
 
         let cellName = defineNamedRangeStringImport(
           indexPrefix,
@@ -855,7 +812,6 @@ function addComparisonYonY(
   activeRow,
   currentStep,
   stepCNr,
-  nrOfIndSubComps,
   currentClass,
   companyNumberOfServices
 ) {
@@ -887,13 +843,10 @@ function addComparisonYonY(
       // setting up company column(s)
       if (serviceNr == 1) {
         // sets up as many columns as the indicator has components
-        for (let k = 0; k < nrOfIndSubComps; k++) {
+        for (let k = 0; k < 1; k++) {
           let thisCell = sheet.getRange(activeRow + elemNr, activeCol);
 
           let component = "";
-          if (nrOfIndSubComps != 1) {
-            component = currentClass.components[k].labelShort;
-          }
 
           let compCellName = defineNamedRangeStringImport(
             indexPrefix,
@@ -908,7 +861,7 @@ function addComparisonYonY(
           // sets up formula that compares values
           let value =
             currentIndicator.y2yCompColumn +
-            (serviceNr - 1) * nrOfIndSubComps +
+            (serviceNr - 1) +
             k; // calculates which column
           let col = columnToLetter(value);
           // TODO
@@ -929,22 +882,19 @@ function addComparisonYonY(
           thisCell.setFormula(formula.toString());
 
           activeCol += 1;
-        } // close nrOfIndSubComps for loop
+        } 
       } // close serviceNr==1 if statement
 
       // setting up opCom column(s)
       else if (serviceNr == 2) {
         // loops through the number of components
-        for (let k = 0; k < nrOfIndSubComps; k++) {
+        for (let k = 0; k < 1; k++) {
           // sets cell
           let thisCell = sheet.getRange(activeRow + elemNr, activeCol);
 
           // creating the name of cell it will be compared to
 
           let component = "";
-          if (nrOfIndSubComps != 1) {
-            component = currentClass.components[k].labelShort;
-          }
 
           let compCellName = defineNamedRangeStringImport(
             indexPrefix,
@@ -959,7 +909,7 @@ function addComparisonYonY(
           // creating formula that compares the two cells
           let value =
             currentIndicator.y2yCompColumn +
-            (serviceNr - 1) * nrOfIndSubComps +
+            (serviceNr - 1) +
             k;
           // finds comparisson column
           let col = columnToLetter(value);
@@ -981,22 +931,19 @@ function addComparisonYonY(
           thisCell.setFormula(formula.toString());
 
           activeCol += 1;
-        } // close nrOfIndSubComps for loop
+        } // close
       } // close serviceNr==2 if statement
 
       // setting up services column(s9
       else {
         // looping thourough the number of components
-        for (let k = 0; k < nrOfIndSubComps; k++) {
+        for (let k = 0; k < 1; k++) {
           // setting cell
           let thisCell = sheet.getRange(activeRow + elemNr, activeCol);
 
           // finding the name of cell that it will be compared too
           let g = serviceNr - 3;
           let component = "";
-          if (nrOfIndSubComps != 1) {
-            component = currentClass.components[k].labelShort;
-          }
 
           let compCellName = defineNamedRangeStringImport(
             indexPrefix,
@@ -1011,7 +958,7 @@ function addComparisonYonY(
           // creating formula that will be placed in cell
           let value =
             currentIndicator.y2yCompColumn +
-            (serviceNr - 1) * nrOfIndSubComps +
+            (serviceNr - 1) +
             k; // calculates which column
           let col = columnToLetter(value);
           // TODO
@@ -1039,7 +986,7 @@ function addComparisonYonY(
 
   // adding the conditional formating so that the cell turns red if the answer is no
   let colMax = columnToLetter(
-    2 + (companyNumberOfServices + 2) * nrOfIndSubComps
+    2 + (companyNumberOfServices + 2)
   );
   let rowMax = activeRow + currentIndicator.elements.length;
 
@@ -1047,7 +994,7 @@ function addComparisonYonY(
     activeRow,
     2,
     currentIndicator.elements.length,
-    2 + (companyNumberOfServices + 2) * nrOfIndSubComps
+    2 + (companyNumberOfServices + 2)
   );
 
   let rule = SpreadsheetApp.newConditionalFormatRule()
@@ -1073,7 +1020,6 @@ function addSources(
   SS,
   currentStep,
   stepCNr,
-  nrOfIndSubComps,
   currentClass,
   companyNumberOfServices
 ) {
@@ -1097,15 +1043,12 @@ function addSources(
 
     if (serviceNr == 1) {
       // main company
-      for (let k = 0; k < nrOfIndSubComps; k++) {
+      for (let k = 0; k < 1; k++) {
         let thisCell = sheet.getRange(activeRow, 1 + serviceNr + k);
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
 
         let component = "";
-        if (nrOfIndSubComps != 1) {
-          component = currentClass.components[k].labelShort;
-        }
 
         let cellName = defineNamedRangeStringImport(
           indexPrefix,
@@ -1123,15 +1066,12 @@ function addSources(
       }
     } else if (serviceNr == 2) {
       // opCom
-      for (let k = 0; k < nrOfIndSubComps; k++) {
-        let thisCell = sheet.getRange(activeRow, 1 + nrOfIndSubComps + k);
+      for (let k = 0; k < 1; k++) {
+        let thisCell = sheet.getRange(activeRow, 2 + k);
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
 
         let component = "";
-        if (nrOfIndSubComps != 1) {
-          component = currentClass.components[k].labelShort;
-        }
 
         let cellName = defineNamedRangeStringImport(
           indexPrefix,
@@ -1149,7 +1089,7 @@ function addSources(
       }
     } else {
       // services
-      for (let k = 0; k < nrOfIndSubComps; k++) {
+      for (let k = 0; k < 1; k++) {
         let thisCell = sheet.getRange(activeRow, activeCol);
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
@@ -1157,9 +1097,6 @@ function addSources(
         let g = serviceNr - 3; // helper for Services
 
         let component = "";
-        if (nrOfIndSubComps != 1) {
-          component = currentClass.components[k].labelShort;
-        }
 
         let cellName = defineNamedRangeStringImport(
           indexPrefix,
