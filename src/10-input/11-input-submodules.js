@@ -191,13 +191,6 @@ function addMainStepHeader(
       .setFontWeight("bold")
       .setVerticalAlignment("top");
 
-    // if it has components it adds the label in the next row
-    if (currentClass.hasSubComponents == true) {
-      let currentCell = sheet.getRange(activeRow + 1, activeCol);
-      currentCell.setValue(currentClass.components[i].labelLong);
-      currentCell.setBackground("#fff2cc");
-    }
-
     activeCol += 1;
   }
 
@@ -217,20 +210,11 @@ function addMainStepHeader(
       cell.setValue("Operating Company (N/A)");
     }
 
-    // if the indicator has components it adds them in the next row
-    if (currentClass.hasSubComponents == true) {
-      let currentCell = sheet
-        .getRange(activeRow + 1, activeCol)
-        .setValue(currentClass.components[i].labelLong)
-        .setBackground("#fff2cc");
-    }
-
     activeCol += 1;
   }
 
   // for remaining columns (services)
   for (let i = 0; i < companyNumberOfServices; i++) {
-    for (let k = 0; k < 1; k++) {
       let cell = sheet
         .getRange(activeRow, activeCol)
         .setValue(CompanyObj.services[i].label.current)
@@ -238,23 +222,9 @@ function addMainStepHeader(
         .setFontWeight("bold")
         .setVerticalAlignment("top");
 
-      // if the indicator has components it adds them in the next row
-      if (currentClass.hasSubComponents == true) {
-        let currentCell = sheet
-          .getRange(activeRow + 1, activeCol)
-          .setValue(currentClass.components[k].labelLong)
-          .setBackground("#b7e1cd");
-      }
       activeCol += 1;
-    }
   }
 
-  // if the indicator does indeed have components, it freezes the additional row in which they are
-  if (currentClass.hasSubComponents == true) {
-    rowRange = (activeRow + 1 + ":" + (activeRow + 1)).toString();
-    sheet.getRange(rowRange).setHorizontalAlignment("center");
-    activeRow = activeRow + 1;
-  }
 
   if (centralConfig.freezeHead) {
     sheet.setFrozenRows(activeRow); // freezes rows; define in config.json
@@ -317,7 +287,6 @@ function addSubStepHeader(
 
   let cellName;
   let thisCell;
-  let component;
 
   let activeCol = thisFirstCol;
 
@@ -332,19 +301,14 @@ function addSubStepHeader(
 
     if (serviceNr == 1) {
       // main company
-      for (let k = 0; k < 1; k++) {
-        thisCell = sheet.getRange(activeRow, 1 + serviceNr + k);
+        thisCell = sheet.getRange(activeRow, 1 + serviceNr);
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
-
-        component = "";
-
         cellName = defineNamedRangeStringImport(
           indexPrefix,
           "DC",
           currentStep.subStepID,
           currentIndicator.labelShort,
-          component,
           CompanyObj.id,
           "group",
           stepCompType
@@ -352,22 +316,16 @@ function addSubStepHeader(
 
         SS.setNamedRange(cellName, thisCell);
         activeCol += 1;
-      }
     } else if (serviceNr == 2) {
       // opCom
-      for (let k = 0; k < 1; k++) {
-        thisCell = sheet.getRange(activeRow, 2 + k);
+        thisCell = sheet.getRange(activeRow, 2);
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
-
-        component = "";
-
         cellName = defineNamedRangeStringImport(
           indexPrefix,
           "DC",
           currentStep.subStepID,
           currentIndicator.labelShort,
-          component,
           CompanyObj.id,
           "opCom",
           stepCompType
@@ -375,24 +333,19 @@ function addSubStepHeader(
 
         SS.setNamedRange(cellName, thisCell);
         activeCol += 1;
-      }
     } else {
       // services
-      for (let k = 0; k < 1 ; k++) {
         thisCell = sheet.getRange(activeRow, activeCol);
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
 
         let g = serviceNr - 3; // helper for Services
 
-        component = "";
-
         cellName = defineNamedRangeStringImport(
           indexPrefix,
           "DC",
           currentStep.subStepID,
           currentIndicator.labelShort,
-          component,
           CompanyObj.id,
           CompanyObj.services[g].id,
           stepCompType
@@ -400,7 +353,6 @@ function addSubStepHeader(
 
         SS.setNamedRange(cellName, thisCell);
         activeCol += 1;
-      }
     }
   }
 
@@ -448,20 +400,14 @@ function addEvaluationDropdown(
     ) {
       // creates column(s) for overall company
       if (serviceNr == 1) {
-        // loops through the number of components
-        for (let k = 0; k < 1; k++) {
           let thisCell = sheet.getRange(activeRow + elemNr, activeCol);
 
           // cell name formula; output defined in 44_rangeNamingHelper.js
-
-          let component = "";
-
           let cellName = defineNamedRangeStringImport(
             indexPrefix,
             "DC",
             currentStep.subStepID,
             thisElement.labelShort,
-            component,
             CompanyObj.id,
             "group",
             stepCompType
@@ -473,25 +419,18 @@ function addEvaluationDropdown(
             .setValue("not selected") // sets default for drop down list
             .setFontWeight("bold"); // bolds the answers
           activeCol += 1;
-        }
       }
 
       // setting up opCom column(s)
       else if (serviceNr == 2) {
-        // loops through the number of components
-        for (let k = 0; k < 1; k++) {
           let thisCell = sheet.getRange(activeRow + elemNr, activeCol);
 
           // cell name formula; output defined in 44_rangeNamingHelper.js
-
-          let component = "";
-
           let cellName = defineNamedRangeStringImport(
             indexPrefix,
             "DC",
             currentStep.subStepID,
             thisElement.labelShort,
-            component,
             CompanyObj.id,
             "opCom",
             stepCompType
@@ -508,26 +447,21 @@ function addEvaluationDropdown(
           }
 
           activeCol += 1;
-        }
       }
 
       // creating all the service columns
       else {
-        for (let k = 0; k < 1; k++) {
           let thisCell = sheet.getRange(activeRow + elemNr, activeCol);
 
           // cell name formula; output defined in 44_rangeNamingHelper.js
 
           let g = serviceNr - 3; // helper for Services
 
-          let component = "";
-
           let cellName = defineNamedRangeStringImport(
             indexPrefix,
             "DC",
             currentStep.subStepID,
             thisElement.labelShort,
-            component,
             CompanyObj.id,
             CompanyObj.services[g].id,
             stepCompType
@@ -539,7 +473,6 @@ function addEvaluationDropdown(
             .setValue("not selected") // sets default for drop down list
             .setFontWeight("bold"); // bolds the answers
           activeCol += 1;
-        }
       }
     }
   }
@@ -588,20 +521,14 @@ function addComments(
     ) {
       // setting up the columns for the overall company
       if (serviceNr == 1) {
-        // looping through the number of components
-        for (let k = 0; k < 1; k++) {
           let thisCell = sheet.getRange(activeRow + elemNr, activeCol);
 
           // cell name formula; output defined in 44_rangeNamingHelper.js
-
-          let component = "";
-
           let cellName = defineNamedRangeStringImport(
             indexPrefix,
             "DC",
             currentStep.subStepID,
             currentIndicator.elements[elemNr].labelShort,
-            component,
             CompanyObj.id,
             "group",
             stepCompType
@@ -609,25 +536,18 @@ function addComments(
 
           SS.setNamedRange(cellName, thisCell);
           activeCol += 1;
-        }
       }
 
       // setting up opCom column(s)
       else if (serviceNr == 2) {
-        // looping through the number of components
-        for (let k = 0; k < 1; k++) {
           let thisCell = sheet.getRange(activeRow + elemNr, activeCol);
 
           // cell name formula; output defined in 44_rangeNamingHelper.js
-
-          let component = "";
-
           let cellName = defineNamedRangeStringImport(
             indexPrefix,
             "DC",
             currentStep.subStepID,
             currentIndicator.elements[elemNr].labelShort,
-            component,
             CompanyObj.id,
             "opCom",
             stepCompType
@@ -635,26 +555,21 @@ function addComments(
 
           SS.setNamedRange(cellName, thisCell);
           activeCol += 1;
-        }
       }
 
       // setting up columns for all the services
       else {
-        for (let k = 0; k < 1; k++) {
           thisCell = sheet.getRange(activeRow + elemNr, activeCol);
 
           // cell name formula; output defined in 44_rangeNamingHelper.js
 
           let g = serviceNr - 3; // helper for Services
 
-          let component = "";
-
           let cellName = defineNamedRangeStringImport(
             indexPrefix,
             "DC",
             currentStep.subStepID,
             currentIndicator.elements[elemNr].labelShort,
-            component,
             CompanyObj.id,
             CompanyObj.services[g].id,
             stepCompType
@@ -662,7 +577,6 @@ function addComments(
 
           SS.setNamedRange(cellName, thisCell);
           activeCol += 1;
-        }
       }
     }
   }
@@ -713,19 +627,14 @@ function addBinaryEvaluation(
     // names the cells into which answers will be put
     if (serviceNr == 1) {
       // overall company
-      for (let k = 0; k < 1; k++) {
         let thisCell = sheet.getRange(activeRow, activeCol);
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
-
-        let component = "";
-
         let cellName = defineNamedRangeStringImport(
           indexPrefix,
           "DC",
           currentStep.subStepID,
           currentIndicator.labelShort,
-          component,
           CompanyObj.id,
           "group",
           stepCompType
@@ -737,24 +646,19 @@ function addBinaryEvaluation(
           .setValue("not selected") // sets default for drop down list
           .setFontWeight("bold"); // bolds the answers
         activeCol += 1;
-      }
+      
     }
 
     // setting up the opCom row
     else if (serviceNr == 2) {
-      for (let k = 0; k < 1; k++) {
         let thisCell = sheet.getRange(activeRow, activeCol);
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
-
-        let component = "";
-
         let cellName = defineNamedRangeStringImport(
           indexPrefix,
           "DC",
           currentStep.subStepID,
           currentIndicator.labelShort,
-          component,
           CompanyObj.id,
           "opCom",
           stepCompType
@@ -766,25 +670,21 @@ function addBinaryEvaluation(
           .setValue("not selected") // sets default for drop down list
           .setFontWeight("bold"); // bolds the answers
         activeCol += 1;
-      }
     }
 
     // taking care of all the service columns
     else {
-      for (let k = 0; k < 1; k++) {
         let thisCell = sheet.getRange(activeRow, activeCol);
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
 
         let g = serviceNr - 3;
-        let component = "";
 
         let cellName = defineNamedRangeStringImport(
           indexPrefix,
           "DC",
           currentStep.subStepID,
           currentIndicator.labelShort,
-          component,
           CompanyObj.id,
           CompanyObj.services[g].id,
           stepCompType
@@ -796,7 +696,7 @@ function addBinaryEvaluation(
           .setValue("not selected") // sets default for drop down list
           .setFontWeight("bold"); // bolds the answers
         activeCol += 1;
-      }
+      
     }
   }
 
@@ -842,18 +742,13 @@ function addComparisonYonY(
 
       // setting up company column(s)
       if (serviceNr == 1) {
-        // sets up as many columns as the indicator has components
-        for (let k = 0; k < 1; k++) {
           let thisCell = sheet.getRange(activeRow + elemNr, activeCol);
-
-          let component = "";
 
           let compCellName = defineNamedRangeStringImport(
             indexPrefix,
             "DC",
             currentStep.components[stepCNr].comparisonLabelShort,
             currentIndicator.elements[elemNr].labelShort,
-            component,
             CompanyObj.id,
             "group"
           );
@@ -861,8 +756,7 @@ function addComparisonYonY(
           // sets up formula that compares values
           let value =
             currentIndicator.y2yCompColumn +
-            (serviceNr - 1) +
-            k; // calculates which column
+            (serviceNr - 1); // calculates which column
           let col = columnToLetter(value);
           // TODO
           let formula =
@@ -882,26 +776,20 @@ function addComparisonYonY(
           thisCell.setFormula(formula.toString());
 
           activeCol += 1;
-        } 
       } // close serviceNr==1 if statement
 
       // setting up opCom column(s)
       else if (serviceNr == 2) {
         // loops through the number of components
-        for (let k = 0; k < 1; k++) {
           // sets cell
           let thisCell = sheet.getRange(activeRow + elemNr, activeCol);
 
           // creating the name of cell it will be compared to
-
-          let component = "";
-
           let compCellName = defineNamedRangeStringImport(
             indexPrefix,
             "DC",
             currentStep.components[stepCNr].comparisonLabelShort,
             currentIndicator.elements[elemNr].labelShort,
-            component,
             CompanyObj.id,
             "opCom"
           );
@@ -909,8 +797,7 @@ function addComparisonYonY(
           // creating formula that compares the two cells
           let value =
             currentIndicator.y2yCompColumn +
-            (serviceNr - 1) +
-            k;
+            (serviceNr - 1);
           // finds comparisson column
           let col = columnToLetter(value);
           // TODO
@@ -931,26 +818,21 @@ function addComparisonYonY(
           thisCell.setFormula(formula.toString());
 
           activeCol += 1;
-        } // close
       } // close serviceNr==2 if statement
 
       // setting up services column(s9
       else {
-        // looping thourough the number of components
-        for (let k = 0; k < 1; k++) {
           // setting cell
           let thisCell = sheet.getRange(activeRow + elemNr, activeCol);
 
           // finding the name of cell that it will be compared too
           let g = serviceNr - 3;
-          let component = "";
 
           let compCellName = defineNamedRangeStringImport(
             indexPrefix,
             "DC",
             currentStep.components[stepCNr].comparisonLabelShort,
             currentIndicator.elements[elemNr].labelShort,
-            component,
             CompanyObj.id,
             CompanyObj.services[g].id
           );
@@ -979,7 +861,6 @@ function addComparisonYonY(
           thisCell.setFormula(formula.toString());
 
           activeCol += 1;
-        }
       }
     }
   }
@@ -1043,19 +924,15 @@ function addSources(
 
     if (serviceNr == 1) {
       // main company
-      for (let k = 0; k < 1; k++) {
-        let thisCell = sheet.getRange(activeRow, 1 + serviceNr + k);
+
+        let thisCell = sheet.getRange(activeRow, 1 + serviceNr);
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
-
-        let component = "";
-
         let cellName = defineNamedRangeStringImport(
           indexPrefix,
           "DC",
           currentStep.subStepID,
           currentIndicator.labelShort,
-          component,
           CompanyObj.id,
           "group",
           stepCompType
@@ -1063,22 +940,16 @@ function addSources(
 
         SS.setNamedRange(cellName, thisCell);
         activeCol += 1;
-      }
     } else if (serviceNr == 2) {
       // opCom
-      for (let k = 0; k < 1; k++) {
-        let thisCell = sheet.getRange(activeRow, 2 + k);
+        let thisCell = sheet.getRange(activeRow, 2);
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
-
-        let component = "";
-
         let cellName = defineNamedRangeStringImport(
           indexPrefix,
           "DC",
           currentStep.subStepID,
           currentIndicator.labelShort,
-          component,
           CompanyObj.id,
           "opCom",
           stepCompType
@@ -1086,24 +957,19 @@ function addSources(
 
         SS.setNamedRange(cellName, thisCell);
         activeCol += 1;
-      }
+      
     } else {
       // services
-      for (let k = 0; k < 1; k++) {
         let thisCell = sheet.getRange(activeRow, activeCol);
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
 
         let g = serviceNr - 3; // helper for Services
-
-        let component = "";
-
         let cellName = defineNamedRangeStringImport(
           indexPrefix,
           "DC",
           currentStep.subStepID,
           currentIndicator.labelShort,
-          component,
           CompanyObj.id,
           CompanyObj.services[g].id,
           stepCompType
@@ -1111,7 +977,7 @@ function addSources(
 
         SS.setNamedRange(cellName, thisCell);
         activeCol += 1;
-      }
+      
     }
   }
 

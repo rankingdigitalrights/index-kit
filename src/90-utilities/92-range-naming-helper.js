@@ -6,10 +6,10 @@
 
 //"use strict"
 
-function defineNamedRangeStringImport(index, sheetModeID, step, indicatorElement, component, companyId, service, suffix) {
+function defineNamedRangeStringImport(index, sheetModeID, step, indicatorElement, companyId, service, suffix) {
 
     let compCellName = index + sheetModeID + step + indicatorElement
-    compCellName = compCellName + companyId + service + component
+    compCellName = compCellName + companyId + service
     if (suffix) {
         compCellName = compCellName + suffix
     }

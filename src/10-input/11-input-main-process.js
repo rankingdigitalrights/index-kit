@@ -38,8 +38,6 @@ function populateDCSheetByCategory(
       continue;
     } // skips this i if sheet already exists
 
-    // checks whether this indicator has components. If yes then it is set to that number, else it is defaulted to 1
-
     // checks how many company group/opcom columns to hide for this Indicator
     // (based on Scoring Scope)
 
@@ -261,13 +259,11 @@ function populateDCSheetByCategory(
         );
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
-        const component = "";
         let stepNamedRange = defineNamedRangeStringImport(
           indexPrefix,
           "DC",
           currentStep.subStepID,
           thisIndCat.indicators[i].labelShort,
-          component,
           CompanyObj.id,
           "",
           "Step"
