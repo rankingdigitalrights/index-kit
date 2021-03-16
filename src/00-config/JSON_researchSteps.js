@@ -46,30 +46,6 @@ let researchStepsVector = {
                             "valueLabel": "sources"
                         }
                     ]
-                },
-                {
-                    "label": "Step 1a: Notes/comments from researchers",
-                    "labelShort": "Step 1a",
-                    "subStepID": "S01a",
-                    "subStepColor": "#ddd9c3",
-                    "doCollapse": false,
-                    "components": [{
-                            "type": "header",
-                            "label": "Researcher",
-                            "value": "Researcher",
-                            "id": "MI",
-                            "importNameFrom": "S01",
-                            "placeholderText": ""
-                        },
-                        {
-                            "type": "elementComments",
-                            "id": "MN",
-                            "label": "Notes for ",
-                            "label2": "",
-                            "valueLabel": "notes",
-                            "clipWrap": true
-                        }
-                    ]
                 }
             ]
         },
@@ -129,30 +105,6 @@ let researchStepsVector = {
                             "valueLabel": "sources"
                         }
                     ]
-                },
-                {
-                    "label": "Step 2a: Notes/comments from researchers",
-                    "labelShort": "Step 2a",
-                    "subStepID": "S02a",
-                    "subStepColor": "#c6d9f0",
-                    "doCollapse": true,
-                    "components": [{
-                            "type": "header",
-                            "label": "Researcher",
-                            "value": "Researcher",
-                            "id": "MI",
-                            "importNameFrom": "S02",
-                            "placeholderText": ""
-                        },
-                        {
-                            "type": "elementComments",
-                            "id": "MN",
-                            "label": "Notes for ",
-                            "label2": "",
-                            "valueLabel": "notes",
-                            "clipWrap": true
-                        }
-                    ]
                 }
             ]
         },
@@ -200,30 +152,6 @@ let researchStepsVector = {
                             "id": "MS",
                             "label": "Sources (reference, specific page, section, etc.)",
                             "valueLabel": "sources"
-                        }
-                    ]
-                },
-                {
-                    "label": "Step 3a: Notes/comments from researchers",
-                    "labelShort": "Step 3a",
-                    "subStepID": "S03a",
-                    "subStepColor": "#d9ead3",
-                    "doCollapse": true,
-                    "components": [{
-                            "type": "header",
-                            "label": "Researcher",
-                            "value": "Researcher",
-                            "id": "MI",
-                            "importNameFrom": "S03",
-                            "placeholderText": ""
-                        },
-                        {
-                            "type": "elementComments",
-                            "id": "MN",
-                            "label": "Notes for ",
-                            "label2": "",
-                            "valueLabel": "notes",
-                            "clipWrap": true
                         }
                     ]
                 }
@@ -285,30 +213,6 @@ let researchStepsVector = {
                             "valueLabel": "sources"
                         }
                     ]
-                },
-                {
-                    "label": "Step 4a: Notes/comments from researchers",
-                    "labelShort": "Step 4a",
-                    "subStepID": "S04a",
-                    "subStepColor": "#d9d2e9",
-                    "doCollapse": true,
-                    "components": [{
-                            "type": "header",
-                            "label": "Researcher",
-                            "value": "Researcher",
-                            "id": "MI",
-                            "importNameFrom": "S04",
-                            "placeholderText": ""
-                        },
-                        {
-                            "type": "elementComments",
-                            "id": "MN",
-                            "label": "Notes for ",
-                            "label2": "",
-                            "valueLabel": "notes",
-                            "clipWrap": true
-                        }
-                    ]
                 }
             ]
         },
@@ -359,30 +263,6 @@ let researchStepsVector = {
                             "valueLabel": "sources"
                         }
                     ]
-                },
-                {
-                    "label": "Step 5a: Notes/comments from researchers",
-                    "labelShort": "Step 5a",
-                    "subStepID": "S05a",
-                    "subStepColor": "#fff2cc",
-                    "doCollapse": true,
-                    "components": [{
-                            "type": "header",
-                            "label": "Researcher",
-                            "value": "Researcher",
-                            "id": "MI",
-                            "importNameFrom": "S05",
-                            "placeholderText": ""
-                        },
-                        {
-                            "type": "elementComments",
-                            "id": "MN",
-                            "label": "Notes for ",
-                            "label2": "",
-                            "valueLabel": "notes",
-                            "clipWrap": true
-                        }
-                    ]
                 }
             ]
         },
@@ -431,30 +311,6 @@ let researchStepsVector = {
                             "id": "MS",
                             "label": "Sources (reference, specific page, section, etc.)",
                             "valueLabel": "sources"
-                        }
-                    ]
-                },
-                {
-                    "label": "Step 6a: Notes/comments from researchers",
-                    "labelShort": "Step 6a",
-                    "subStepID": "S06a",
-                    "doCollapse": true,
-                    "subStepColor": "#ead1dc",
-                    "components": [{
-                            "type": "header",
-                            "label": "Researcher",
-                            "value": "Researcher",
-                            "id": "MI",
-                            "importNameFrom": "S06",
-                            "placeholderText": ""
-                        },
-                        {
-                            "type": "elementComments",
-                            "id": "MN",
-                            "label": "Notes for ",
-                            "label2": "",
-                            "valueLabel": "notes",
-                            "clipWrap": true
                         }
                     ]
                 }
