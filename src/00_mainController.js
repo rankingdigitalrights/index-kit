@@ -53,3 +53,30 @@ function initiateGlobalConfig() {
 
   controlSpreadsheetID = centralConfig.controlSpreadsheetID; // 00_2019_Pilot_Dashboard
 }
+
+
+function mainScoringSheets() {
+
+  initiateGlobalConfig()
+  outputFolderName = "Index Kit Scores Dev"
+  var mainSheetMode = "Output"
+  var useStepsSubset = false // true := use subset
+  var useIndicatorSubset = false // true := use subset
+
+  var Companies = companiesVector.companies
+      .slice(1, 9)
+  // .slice(0,1) // Amazon
+  // .slice(1, 2) // Apple
+  // .slice(3,4) //
+
+  var fileID
+
+  Companies.forEach(function (Company) {
+
+      fileID = createSpreadsheetOutput(useStepsSubset, useIndicatorSubset, Company, filenamePrefix, filenameSuffix, mainSheetMode)
+
+      addFileIDtoControl(mainSheetMode, Company.label.current, fileID, controlSpreadsheetID)
+
+  })
+}
+
