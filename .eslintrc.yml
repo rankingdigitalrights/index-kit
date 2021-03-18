@@ -1,0 +1,28 @@
+env:
+  browser: false
+  es6: true
+  node: true
+  googleappsscript/googleappsscript: true
+extends: 
+    - eslint:recommended
+    - prettier
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+parserOptions:
+  ecmaVersion: 2018
+rules:
+  indent:
+    - off
+    - 4
+  linebreak-style:
+    - error
+    - unix
+  quotes:
+    - error
+    - single
+  prettier:
+    - error
+plugins:
+  - googleappsscript
+  - prettier
