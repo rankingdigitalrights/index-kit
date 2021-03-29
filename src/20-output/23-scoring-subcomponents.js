@@ -537,7 +537,7 @@ function addLevelScores(
 
   // OpCom AVERAGE
 
-  let currentCell = sheet.getRange(activeRow, tempCol)
+  currentCell = sheet.getRange(activeRow, tempCol)
 
   if (companyHasOpCom) {
     let serviceCells = []
