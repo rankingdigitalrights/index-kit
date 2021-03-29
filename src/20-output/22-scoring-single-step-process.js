@@ -49,10 +49,6 @@ function scoringSingleStep(
     Logger.log('begin Indicator Category: ' + thisIndCat.labelLong)
     var nrOfIndSubComps = 1
 
-    if (thisIndCat.hasSubComponents == true) {
-      nrOfIndSubComps = thisIndCat.components.length
-    }
-
     // TODO: Refactor to main caller
 
     var thisIndCatLength

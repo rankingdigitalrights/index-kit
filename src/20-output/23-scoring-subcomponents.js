@@ -51,53 +51,39 @@ function setScoringCompanyHeader(activeRow, activeCol, sheet, Indicator, indicat
   // group
   let thisColor = '#d9d9d9' // grey TODO: outsource to Config
 
-  for (let g = 0; g < nrOfIndSubComps; g++) {
-    currentCell = sheet.getRange(activeRow, activeCol)
-    columnLabel = 'Group\n' + companyObj.label.current
+  currentCell = sheet.getRange(activeRow, activeCol)
+  columnLabel = 'Group\n' + companyObj.label.current
 
-    if (nrOfIndSubComps > 1) {
-      columnLabel = columnLabel + '\n' + indicatorCat.components[g].labelLong
-    }
+  currentCell = styleScoringIndicatorHeader(currentCell, columnLabel, thisColor)
 
-    currentCell = styleScoringIndicatorHeader(currentCell, columnLabel, thisColor)
-
-    activeCol += 1
-  }
+  activeCol += 1
 
   // opcom
-  for (let g = 0; g < nrOfIndSubComps; g++) {
-    currentCell = sheet.getRange(activeRow, activeCol)
-    columnLabel = 'OperatingCo\n'
+  currentCell = sheet.getRange(activeRow, activeCol)
+  columnLabel = 'OperatingCo\n'
 
-    if (companyObj.hasOpCom == true) {
-      columnLabel = columnLabel + companyObj.opComLabel
-    } else {
-      columnLabel = columnLabel + ' N/A '
-    }
-
-    if (nrOfIndSubComps > 1) {
-      columnLabel = columnLabel + '\n' + indicatorCat.components[g].labelLong
-    }
-
-    currentCell = styleScoringIndicatorHeader(currentCell, columnLabel, thisColor)
-
-    activeCol += 1
+  if (companyObj.hasOpCom == true) {
+    columnLabel = columnLabel + companyObj.opComLabel
+  } else {
+    columnLabel = columnLabel + ' N/A '
   }
+
+  currentCell = styleScoringIndicatorHeader(currentCell, columnLabel, thisColor)
+
+  activeCol += 1
 
   // --- // --- Services --- // --- //
   for (let s = 0; s < companyObj.numberOfServices; s++) {
-    for (let g = 0; g < nrOfIndSubComps; g++) {
-      currentCell = sheet.getRange(activeRow, activeCol)
-      columnLabel = companyObj.services[s].label.current
+    currentCell = sheet.getRange(activeRow, activeCol)
+    columnLabel = companyObj.services[s].label.current
 
-      if (nrOfIndSubComps > 1) {
-        columnLabel = columnLabel + '\n' + indicatorCat.components[g].labelLong
-      }
-
-      currentCell = styleScoringIndicatorHeader(currentCell, columnLabel, thisColor)
-
-      activeCol += 1
+    if (nrOfIndSubComps > 1) {
+      columnLabel = columnLabel + '\n' + indicatorCat.components[g].labelLong
     }
+
+    currentCell = styleScoringIndicatorHeader(currentCell, columnLabel, thisColor)
+
+    activeCol += 1
   }
   return activeRow + 1
 }
@@ -123,7 +109,6 @@ function importElementBlock(
 
   let compCellName, tempCol, formula, currentCell, rowLabel
   let urlDC = CompanyObj.urlCurrentDataCollectionSheet
-  let component = '' // TODO: remove
 
   Logger.log('Element Data Type: ' + stepCompID)
 
@@ -153,7 +138,6 @@ function importElementBlock(
       'DC',
       thisSubStepID,
       Indicator.elements[elemNr].labelShort,
-      component,
       CompanyObj.id,
       'group',
       stepCompID
@@ -173,7 +157,6 @@ function importElementBlock(
         'DC',
         thisSubStepID,
         Indicator.elements[elemNr].labelShort,
-        component,
         CompanyObj.id,
         'opCom',
         stepCompID
@@ -196,7 +179,6 @@ function importElementBlock(
         'DC',
         thisSubStepID,
         Indicator.elements[elemNr].labelShort,
-        component,
         CompanyObj.id,
         CompanyObj.services[s].id,
         stepCompID
@@ -263,16 +245,51 @@ function importElementRow(
     tempCol += 1
   }
 
-  let component = ''
-
   // result cells
   // for Group + Indicator Subcomponents
-  for (let k = 0; k < nrOfIndSubComps; k++) {
-    currentCell = sheet.getRange(activeRow, tempCol)
+  currentCell = sheet.getRange(activeRow, tempCol)
 
-    if (nrOfIndSubComps != 1) {
-      component = indicatorCat.components[k].labelShort
-    }
+  // setting up formula that compares values
+  let compCellName = defineNamedRangeStringImport(
+    indexPrefix,
+    'DC',
+    currentSubStepID,
+    Indicator.labelShort,
+    CompanyObj.id,
+    'group',
+    stepCompID
+  )
+
+  // adding formula
+  let formula = importRangeFormula(urlDC, compCellName, integrateOutputs)
+  currentCell.setFormula(formula)
+  tempCol += 1
+
+  // for opCom + Indicator Subcomponents
+  currentCell = sheet.getRange(activeRow, tempCol)
+
+  if (companyHasOpCom) {
+    // setting up formula that compares values
+    let compCellName = defineNamedRangeStringImport(
+      indexPrefix,
+      'DC',
+      currentSubStepID,
+      Indicator.labelShort,
+      CompanyObj.id,
+      'opCom',
+      stepCompID
+    )
+
+    let formula = importRangeFormula(urlDC, compCellName, integrateOutputs)
+    currentCell.setFormula(formula)
+  } else {
+    currentCell.setValue(' ⨯ ').setHorizontalAlignment('center')
+  }
+  tempCol += 1
+
+  // for n Services + Indicator Subcomponents
+  for (let g = 0; g < CompanyObj.services.length; g++) {
+    currentCell = sheet.getRange(activeRow, tempCol)
 
     // setting up formula that compares values
     let compCellName = defineNamedRangeStringImport(
@@ -280,73 +297,15 @@ function importElementRow(
       'DC',
       currentSubStepID,
       Indicator.labelShort,
-      component,
       CompanyObj.id,
-      'group',
+      CompanyObj.services[g].id,
       stepCompID
     )
 
-    // adding formula
     let formula = importRangeFormula(urlDC, compCellName, integrateOutputs)
     currentCell.setFormula(formula)
+
     tempCol += 1
-  }
-
-  // for opCom + Indicator Subcomponents
-  for (let k = 0; k < nrOfIndSubComps; k++) {
-    currentCell = sheet.getRange(activeRow, tempCol)
-
-    if (nrOfIndSubComps != 1) {
-      component = indicatorCat.components[k].labelShort
-    }
-
-    if (companyHasOpCom) {
-      // setting up formula that compares values
-      let compCellName = defineNamedRangeStringImport(
-        indexPrefix,
-        'DC',
-        currentSubStepID,
-        Indicator.labelShort,
-        component,
-        CompanyObj.id,
-        'opCom',
-        stepCompID
-      )
-
-      let formula = importRangeFormula(urlDC, compCellName, integrateOutputs)
-      currentCell.setFormula(formula)
-    } else {
-      currentCell.setValue(' ⨯ ').setHorizontalAlignment('center')
-    }
-    tempCol += 1
-  }
-
-  // for n Services + Indicator Subcomponents
-  for (let g = 0; g < CompanyObj.services.length; g++) {
-    for (k = 0; k < nrOfIndSubComps; k++) {
-      currentCell = sheet.getRange(activeRow, tempCol)
-
-      if (nrOfIndSubComps != 1) {
-        component = indicatorCat.components[k].labelShort
-      }
-
-      // setting up formula that compares values
-      let compCellName = defineNamedRangeStringImport(
-        indexPrefix,
-        'DC',
-        currentSubStepID,
-        Indicator.labelShort,
-        component,
-        CompanyObj.id,
-        CompanyObj.services[g].id,
-        stepCompID
-      )
-
-      let formula = importRangeFormula(urlDC, compCellName, integrateOutputs)
-      currentCell.setFormula(formula)
-
-      tempCol += 1
-    }
   }
 
   activeRow += 1
@@ -416,16 +375,12 @@ function addElementScores(
       currentCell.setNumberFormat('0.##')
 
       // cell name formula; output defined in 44_rangeNamingHelper.js
-      let component = ''
-      if (nrOfIndSubComps != 1) {
-        component = indicatorCat.components[k].labelShort
-      }
+
       let cellName = defineNamedRangeStringImport(
         indexPrefix,
         sheetModeID,
         currentStepLabelShort,
         Indicator.elements[elemNr].labelShort,
-        component,
         CompanyObj.id,
         'group',
         scoringSuffix
@@ -447,16 +402,12 @@ function addElementScores(
         currentCell.setFormula(elementScore)
         currentCell.setNumberFormat('0.##')
         // cell name formula; output defined in 44_rangeNamingHelper.js
-        component = ''
-        if (nrOfIndSubComps != 1) {
-          component = indicatorCat.components[k].labelShort
-        }
+
         cellName = defineNamedRangeStringImport(
           indexPrefix,
           sheetModeID,
           currentStepLabelShort,
           Indicator.elements[elemNr].labelShort,
-          component,
           CompanyObj.id,
           'opCom',
           scoringSuffix
@@ -483,16 +434,12 @@ function addElementScores(
         currentCell.setFormula(elementScore)
         currentCell.setNumberFormat('0.##')
         // cell name formula; output defined in 44_rangeNamingHelper.js
-        component = ''
-        if (nrOfIndSubComps != 1) {
-          component = indicatorCat.components[k].labelShort
-        }
+
         cellName = defineNamedRangeStringImport(
           indexPrefix,
           sheetModeID,
           currentStepLabelShort,
           Indicator.elements[elemNr].labelShort,
-          component,
           CompanyObj.id,
           CompanyObj.services[g].id,
           scoringSuffix
@@ -557,16 +504,11 @@ function addLevelScores(
     for (let elemNr = 0; elemNr < Indicator.elements.length; elemNr++) {
       // finding the cell names that are used in calculating a company specific average
 
-      let component = ''
-      if (nrOfIndSubComps != 1) {
-        component = indicatorCat.components[k].labelShort
-      }
       let cellName = defineNamedRangeStringImport(
         indexPrefix,
         sheetModeID,
         currentStepLabelShort,
         Indicator.elements[elemNr].labelShort,
-        component,
         CompanyObj.id,
         'group',
         'SE'
@@ -578,16 +520,12 @@ function addLevelScores(
     currentCell.setFormula(levelFormula)
     currentCell.setNumberFormat('0.##')
     // naming the group level cell score
-    let component = ''
-    if (nrOfIndSubComps != 1) {
-      component = indicatorCat.components[k].labelShort
-    }
+
     let cellName = defineNamedRangeStringImport(
       indexPrefix,
       sheetModeID,
       currentStepLabelShort,
       Indicator.labelShort,
-      component,
       CompanyObj.id,
       'group',
       scoringSuffix
@@ -599,112 +537,90 @@ function addLevelScores(
 
   // OpCom AVERAGE
 
-  for (k = 0; k < nrOfIndSubComps; k++) {
-    let currentCell = sheet.getRange(activeRow, tempCol)
+  let currentCell = sheet.getRange(activeRow, tempCol)
 
-    if (companyHasOpCom) {
-      let serviceCells = []
+  if (companyHasOpCom) {
+    let serviceCells = []
 
-      for (let elemNr = 0; elemNr < Indicator.elements.length; elemNr++) {
-        // finding the cell names that are used in calculating a company specific average
-        let component = ''
-        if (nrOfIndSubComps != 1) {
-          component = indicatorCat.components[k].labelShort
-        }
-        let cellName = defineNamedRangeStringImport(
-          indexPrefix,
-          sheetModeID,
-          currentStepLabelShort,
-          Indicator.elements[elemNr].labelShort,
-          component,
-          CompanyObj.id,
-          'opCom',
-          'SE'
-        )
-        if (companyHasOpCom == true) {
-          serviceCells.push(cellName)
-        }
-      }
-
-      let levelFormula = levelScoreFormula(serviceCells)
-      currentCell.setFormula(levelFormula)
-      currentCell.setNumberFormat('0.##')
-      // naming the opCom level cell score
-      let component = ''
-      if (nrOfIndSubComps != 1) {
-        component = indicatorCat.components[k].labelShort
-      }
+    for (let elemNr = 0; elemNr < Indicator.elements.length; elemNr++) {
+      // finding the cell names that are used in calculating a company specific average
 
       let cellName = defineNamedRangeStringImport(
         indexPrefix,
         sheetModeID,
         currentStepLabelShort,
-        Indicator.labelShort,
-        component,
+        Indicator.elements[elemNr].labelShort,
         CompanyObj.id,
         'opCom',
-        scoringSuffix
+        'SE'
       )
-      SS.setNamedRange(cellName, currentCell)
-      indyLevelScoresCompany.push(cellName)
-    } else {
-      currentCell.setValue(' N/A ').setHorizontalAlignment('center')
+      if (companyHasOpCom == true) {
+        serviceCells.push(cellName)
+      }
     }
-    tempCol += 1
+
+    let levelFormula = levelScoreFormula(serviceCells)
+    currentCell.setFormula(levelFormula)
+    currentCell.setNumberFormat('0.##')
+    // naming the opCom level cell score
+
+    let cellName = defineNamedRangeStringImport(
+      indexPrefix,
+      sheetModeID,
+      currentStepLabelShort,
+      Indicator.labelShort,
+      CompanyObj.id,
+      'opCom',
+      scoringSuffix
+    )
+    SS.setNamedRange(cellName, currentCell)
+    indyLevelScoresCompany.push(cellName)
+  } else {
+    currentCell.setValue(' N/A ').setHorizontalAlignment('center')
   }
+  tempCol += 1
 
   // --- SERVICES --- //
   // iterate over services
   for (let g = 0; g < CompanyObj.services.length; g++) {
-    for (k = 0; k < nrOfIndSubComps; k++) {
-      currentCell = sheet.getRange(activeRow, tempCol)
-      let serviceCells = []
-      for (let elemNr = 0; elemNr < Indicator.elements.length; elemNr++) {
-        // finding the cell names that are used in calculating a company specific average
-        let component = ''
-        if (nrOfIndSubComps != 1) {
-          component = indicatorCat.components[k].labelShort
-        }
-        let cellName = defineNamedRangeStringImport(
-          indexPrefix,
-          sheetModeID,
-          currentStepLabelShort,
-          Indicator.elements[elemNr].labelShort,
-          component,
-          CompanyObj.id,
-          CompanyObj.services[g].id,
-          'SE'
-        )
-        serviceCells.push(cellName)
-      }
-
-      let levelFormula = levelScoreFormula(serviceCells)
-      currentCell.setFormula(levelFormula)
-      currentCell.setNumberFormat('0.##')
-
-      // naming the service level cell score
-      let component = ''
-      if (nrOfIndSubComps != 1) {
-        component = indicatorCat.components[k].labelShort
-      }
+    currentCell = sheet.getRange(activeRow, tempCol)
+    let serviceCells = []
+    for (let elemNr = 0; elemNr < Indicator.elements.length; elemNr++) {
+      // finding the cell names that are used in calculating a company specific average
 
       let cellName = defineNamedRangeStringImport(
         indexPrefix,
         sheetModeID,
         currentStepLabelShort,
-        Indicator.labelShort,
-        component,
+        Indicator.elements[elemNr].labelShort,
         CompanyObj.id,
         CompanyObj.services[g].id,
-        scoringSuffix
+        'SE'
       )
-
-      SS.setNamedRange(cellName, currentCell)
-
-      indyLevelScoresServices.push(cellName)
-
-      tempCol += 1
+      serviceCells.push(cellName)
     }
+
+    let levelFormula = levelScoreFormula(serviceCells)
+    currentCell.setFormula(levelFormula)
+    currentCell.setNumberFormat('0.##')
+
+    // naming the service level cell score
+
+    let cellName = defineNamedRangeStringImport(
+      indexPrefix,
+      sheetModeID,
+      currentStepLabelShort,
+      Indicator.labelShort,
+      CompanyObj.id,
+      CompanyObj.services[g].id,
+      scoringSuffix
+    )
+
+    SS.setNamedRange(cellName, currentCell)
+
+    indyLevelScoresServices.push(cellName)
+
+    tempCol += 1
   }
   return activeRow + 1
 }
@@ -833,14 +749,12 @@ function addIndicatorScore(
   currentCell.setNumberFormat('0.##')
 
   // naming the level cell score
-  let component = ''
 
   let cellName = defineNamedRangeStringImport(
     indexPrefix,
     sheetModeID,
     currentStepLabelShort,
     Indicator.labelShort,
-    component,
     CompanyObj.id,
     '',
     scoringSuffix
