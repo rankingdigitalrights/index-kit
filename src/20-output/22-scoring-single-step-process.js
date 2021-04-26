@@ -70,16 +70,8 @@ function scoringSingleStep(
       var indyLevelScoresServices = []
       var indyCompositeScores = []
 
-      activeRow = setScoringCompanyHeader(
-        activeRow,
-        firstCol,
-        Sheet,
-        thisInd,
-        nrOfIndSubComps,
-        thisIndCat,
-        CompanyObj,
-        blocks
-      )
+      activeRow = setScoringCompanyHeader(activeRow, firstCol, Sheet, thisInd, thisIndCat, CompanyObj, blocks)
+
       Logger.log(' - company header added for ' + thisInd.labelShort)
 
       // --- // Main task // --- //

@@ -85,7 +85,6 @@ function addSetOfScoringSteps(
 
   var thisSheet = SS.getSheetByName(sheetName)
   thisSheet.setFrozenColumns(1)
-  singleSheetProtect(thisSheet, sheetName)
 
   if (integrateOutputs) moveSheetifExists(SS, thisSheet, 1)
 }

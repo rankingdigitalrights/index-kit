@@ -77,10 +77,6 @@ function setScoringCompanyHeader(activeRow, activeCol, sheet, Indicator, indicat
     currentCell = sheet.getRange(activeRow, activeCol)
     columnLabel = companyObj.services[s].label.current
 
-    if (nrOfIndSubComps > 1) {
-      columnLabel = columnLabel + '\n' + indicatorCat.components[g].labelLong
-    }
-
     currentCell = styleScoringIndicatorHeader(currentCell, columnLabel, thisColor)
 
     activeCol += 1
