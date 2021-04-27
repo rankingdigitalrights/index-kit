@@ -77,8 +77,8 @@ function createSpreadsheetInput({
   // for each Indicator Class do
   let currentCat
 
-  for (let i = 0; i < Indicators.indicatorClasses.length; i++) {
-    currentCat = Indicators.indicatorClasses[i]
+  for (let i = 0; i < Indicators.indicatorCategories.length; i++) {
+    currentCat = Indicators.indicatorCategories[i]
 
     Logger.log('Starting ' + currentCat.labelLong)
     Logger.log('Passing over ' + ResearchStepsObj.researchSteps.length + ' Steps')
