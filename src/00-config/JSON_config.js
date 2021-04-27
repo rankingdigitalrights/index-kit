@@ -1,10 +1,10 @@
 //"use strict"
 let centralConfig = {
-  indexPrefix: 'RDR19P',
-  filenameSuffix: 'Pilot Dev',
-  rootFolderID: '1hI0owKRoPdtr6I7rwUFrUzvidsjTqI46', // "2019 Back-end testing"
-  outputFolderName: '2021 Pilot Dev', // ID: 1eZxqA2_ebOYs9oMnySKSzV5ybNwrEmMO
-  controlSpreadsheetID: '1H6QNR0MspaQRvekxPNmwaK96bkW-lFCh6OlFmXOrrOU', // 00_Pilot_Dashboard
+  indexPrefix: 'RDR21M',
+  filenameSuffix: 'Dev',
+  rootFolderID: '14trMtOe_IWDCHoE91naBtgHHx4zZi5_6', // "2019 Back-end testing"
+  outputFolderName: '2021 Mini Index', // ID: 1eZxqA2_ebOYs9oMnySKSzV5ybNwrEmMO
+  controlSpreadsheetID: '1uEt_u2dd2cedrsL-qDeQ_5qgLQ0U9UADFckponLE3FQ', // 00_Pilot_Dashboard
   YearOnYear: false,
   freezeHead: false,
   serviceColWidth: 280,
