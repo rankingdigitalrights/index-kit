@@ -10,19 +10,7 @@ function mainInputSheets() {
   let useIndicatorSubset = true // true := use subset
 
   let Companies = companiesVector.companies.slice(0, 0) // on purpose to prevent script from running.
-  // .slice(0,3) // Subset #1 0:2
-  // .slice(3,6) // Subset #2 3:5
-  // .slice(6,9) // Subset #3 6:8
-
-  // .slice(0,1) // Amazon
-  // .slice(1, 2) // Apple
-  // .slice(2,3) // Deutsche Telekom
-  // .slice(3,4) // Facebook
-  // .slice(4, 5) // Google
-  // .slice(5,6) // Microsoft
-  // .slice(6,7) // Telefonica
-  // .slice(7,8) // Twitter
-  // .slice(8,9) // Vodafone
+  // .slice(0,1) // Baidu
 
   let fileID
 
@@ -47,6 +35,9 @@ function initiateGlobalConfig() {
   outputFolderName = '2021 Mini Index' // "2019 Pilot Data Store"
 
   controlSpreadsheetID = centralConfig.controlSpreadsheetID // 00_2019_Pilot_Dashboard
+
+  //let IndicatorsObj = indicatorsVector
+  let IndicatorsObj = subsetIndicatorsObject(indicatorsVector, ['G4a', 'F1a', 'P1a'])
 }
 
 function mainScoringSheets() {
@@ -57,9 +48,7 @@ function mainScoringSheets() {
   var useIndicatorSubset = false // true := use subset
 
   var Companies = companiesVector.companies.slice(1, 9)
-  // .slice(0,1) // Amazon
-  // .slice(1, 2) // Apple
-  // .slice(3,4) //
+  // .slice(0,1) // Baidu
 
   var fileID
 

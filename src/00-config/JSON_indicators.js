@@ -1,4 +1,4 @@
-const indicatorsVector = {
+let indicatorsVector = {
   collection: 'indicators',
   indexYear: 2020,
   indexType: 'RDR Index',
