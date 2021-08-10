@@ -9,8 +9,25 @@ function mainInputSheets() {
   let mainSheetMode = 'Input' // for filename
   let useIndicatorSubset = true // true := use subset
 
-  let Companies = companiesVector.companies.slice(0, 0) // on purpose to prevent script from running.
-  // .slice(0,1) // Baidu
+  let Companies = companiesVector.companies //.slice(0, 0) // on purpose to prevent script from running.
+    .slice(0,15)
+
+    // .slice(0,1) // SLT Mobitel
+    // .slice(1,2) // Dialog
+    // .slice(2,3) // Globe Telecom
+    // .slice(3,4) // Smart Communications
+    // .slice(4,5) // NCell
+    // .slice(5,6) // Nepal Telecom
+    // .slice(6,7) // Dhiraagu
+    // .slice(7,8) // Ooredoo Maldives
+    // .slice(8,9) // Telkomsel
+    // .slice(9,10) // XL Axiata
+    // .slice(10,11) // Indosat Ooredoo
+    // .slice(11,12) // Grameenphone
+    // .slice(12,13) // Robi
+    // .slice(13,14) // Smart
+    // .slice(14,15) // Metfone
+
 
   let fileID
 
@@ -32,25 +49,24 @@ function initiateGlobalConfig() {
   filenamePrefix = '2021 Mini Index -'
   filenameSuffix = 'Dev' // Dev, "", Debug, QC
   rootFolderID = centralConfig.rootFolderID // "2019 Back-End Dev"
-  outputFolderName = '2021 Mini Index' // "2019 Pilot Data Store"
+  outputFolderName = centralConfig.outputFolderName // '2021 Mini Index'
 
   controlSpreadsheetID = centralConfig.controlSpreadsheetID // 00_2019_Pilot_Dashboard
 
-  //let IndicatorsObj = indicatorsVector
-  let IndicatorsObj = subsetIndicatorsObject(indicatorsVector, ['G4a', 'F1a', 'P1a'])
+  IndicatorsObj = subsetIndicatorsObject(indicatorsVector, ['F1a', 'F3a', 'F9', 'F10', 'P1a', 'P10a', 'P11a', 'P12'])
 }
 
 function mainScoringSheets() {
   initiateGlobalConfig()
-  outputFolderName = 'Index Kit Scores Dev'
-  var mainSheetMode = 'Output'
-  var useStepsSubset = false // true := use subset
-  var useIndicatorSubset = false // true := use subset
+  outputFolderName = 'Index Kit Scores - EngageMedia'
+  let mainSheetMode = 'Output'
+  let useStepsSubset = false // true := use subset
+  let useIndicatorSubset = false // true := use subset
 
-  var Companies = companiesVector.companies.slice(1, 9)
-  // .slice(0,1) // Baidu
+  let Companies = companiesVector.companies.slice(0, 15)
+  // .slice(0,1) // SLT Mobitel
 
-  var fileID
+  let fileID
 
   Companies.forEach(function (Company) {
     fileID = createSpreadsheetOutput(

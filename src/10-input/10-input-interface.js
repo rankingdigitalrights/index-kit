@@ -25,7 +25,7 @@ function createSpreadsheetInput({
 
   // json objects
   let Config = centralConfig // let Config = importLocalJSON("Config")
-  let Indicators = indicatorsObj
+  let Indicators = IndicatorsObj
   let ResearchStepsObj = researchStepsVector
 
   // config information

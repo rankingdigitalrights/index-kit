@@ -48,8 +48,8 @@ function addSetOfScoringSteps(
     return lastCol
   }
 
-  for (var mainStepNr = firstScoringStep; mainStepNr < maxScoringStep; mainStepNr++) {
-    var thisMainStep = ResearchStepsObj.researchSteps[mainStepNr]
+  for (let mainStepNr = firstScoringStep; mainStepNr < maxScoringStep; mainStepNr++) {
+    let thisMainStep = ResearchStepsObj.researchSteps[mainStepNr]
     Logger.log('--- Main Step : ' + thisMainStep.step + ' ---')
     // var subStepsLength = thisMainStep.substeps.length
 
