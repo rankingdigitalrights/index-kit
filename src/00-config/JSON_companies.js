@@ -9,26 +9,26 @@ let companiesVector = {
   indexType: 'RDR Mini',
   companies: [
     {
-      id: 'tSL1',
+      id: 'tEW1',
       label: {
-        current: 'SLT Mobitel',
+        current: 'Econet Wireless Global',
         altFilename: null,
         legacy: [null]
       },
       type: 'telecom',
-      groupLabel: 'SLT Mobitel',
+      groupLabel: 'Econet Wireless Global',
       hasOpCom: true,
-      opComLabel: 'SLT Mobitel Sri Lanka',
+      opComLabel: 'Econet Lesotho',
       isPrevScored: false,
       firstIndex: null,
       urlPreviousYearResults: null,
       tabPrevYearsOutcome: null,
-      urlCurrentDataCollectionSheet: '1j0VsPY3O-gmiqZeBJplwpphpW8VMSeniKjjEooKJH7M',
-      urlCurrentCompanyScoringSheet: null,
-      numberOfServices: 2,
+      urlCurrentDataCollectionSheet: '1GiX0HBTExAcHa-7rxpVwqjzzZ30Ss-jdiKAPKdzQdRo',
+      urlCurrentCompanyScoringSheet: '1J83A8ALV6pNUuJWoRUPWiJhNvG3WtcGUZOOkwGyzKkk',
+      numberOfServices: 3,
       services: [
         {
-          id: 'mbSL1',
+          id: 'mbEW1',
           type: 'mobile',
           label: {
             current: 'Mobile',
@@ -36,488 +36,113 @@ let companiesVector = {
           }
         },
         {
-          id: 'bbSL1',
+          id: 'bbEW1',
           type: 'broadband',
           label: {
             current: 'Fixed-line broadband',
+            legacy: [null],
+          }
+        },
+        {
+          id: 'mpEW1',
+          type: 'mobilePayments',
+          label: {
+            current: 'EcoCash',
             legacy: [null],
           }
         }
       ]
     },
     {
-      id: 'tDL1',
+      id: 'tVO1',
       label: {
-        current: 'Dialog',
+        current: 'Vodacom Group Limited',
         altFilename: null,
         legacy: [null]
       },
       type: 'telecom',
-      groupLabel: 'Axiata',
+      groupLabel: 'Vodacom Group Limited',
       hasOpCom: true,
-      opComLabel: 'Dialog Sri Lanka',
+      opComLabel: 'Vodacom Lesotho',
       isPrevScored: false,
       firstIndex: null,
       urlPreviousYearResults: null,
       tabPrevYearsOutcome: null,
-      urlCurrentDataCollectionSheet: '12sepYaMO4LUfij0DZU0Mc7cHZ2hIBWPFqNqSiWlJwA0',
-      urlCurrentCompanyScoringSheet: null,
-      numberOfServices: 1,
+      urlCurrentDataCollectionSheet: '1e922IcqtGj39MdVPxjH3F4CNouolfNyT40OAh2ceiuo',
+      urlCurrentCompanyScoringSheet: '1LU7iy2wcBcoJihwunRV8bcAYH-vhHTXUHg6vbJ6yxoM',
+      numberOfServices: 2,
       services: [
         {
-          id: 'mbDL1',
+          id: 'mbVO1',
           type: 'mobile',
           label: {
             current: 'Mobile',
+            legacy: [null]
+          }
+        },
+        {
+          id: 'mpVO1',
+          type: 'mobilePayments',
+          label: {
+            current: 'M-Pesa',
             legacy: [null]
           }
         }
       ]
     },
     {
-      id: 'tGT1',
+      id: 'iSB1',
       label: {
-        current: 'Globe Telecom',
+        current: 'Standard Bank Group',
         altFilename: null,
         legacy: [null]
       },
-      type: 'telecom',
-      groupLabel: 'Globe Telecom',
+      type: 'internet',
+      groupLabel: 'Standard Bank Group',
       hasOpCom: true,
-      opComLabel: 'Globe Telecom Philipines',
+      opComLabel: 'Standard Bank',
       isPrevScored: false,
       firstIndex: null,
       urlPreviousYearResults: null,
       tabPrevYearsOutcome: null,
-      urlCurrentDataCollectionSheet: '1CKtscH7Bn9nWjmZhh8UKoyr80WTJUVVAseZAYxqjwmc',
-      urlCurrentCompanyScoringSheet: null,
-      numberOfServices: 2,
-      services: [
-        {
-          id: 'mbGT1',
-          type: 'mobile',
-          label: {
-            current: 'Mobile',
-            legacy: [null],
-          }
-        },
-        {
-          id: 'bbGT1',
-          type: 'broadband',
-          label: {
-            current: 'Fixed-line broadband',
-            legacy: [null],
-          }
-        }
-      ]
-    },
-    {
-      id: 'tST1',
-      label: {
-        current: 'Smart Communications',
-        altFilename: null,
-        legacy: [null]
-      },
-      type: 'telecom',
-      groupLabel: 'Smart Communications',
-      hasOpCom: true,
-      opComLabel: 'Smart Communications Philippines',
-      isPrevScored: false,
-      firstIndex: null,
-      urlPreviousYearResults: null,
-      tabPrevYearsOutcome: null,
-      urlCurrentDataCollectionSheet: '1RiwGuU4yR-QhYUZr1n1gR4MgQEaBqWD_kejXHSKpxL8',
-      urlCurrentCompanyScoringSheet: null,
+      urlCurrentDataCollectionSheet: '1F0GsFExeaz4p9OrjqQX7yXYnDlvswon4Id-SLUZPbng',
+      urlCurrentCompanyScoringSheet: '1SP7ebcXugZ_n2guySyRBhb84Z2K-imWzbMYKmBoxWUw',
       numberOfServices: 1,
       services: [
         {
-          id: 'mbST1',
-          type: 'mobile',
+          id: 'baSB1',
+          type: 'eBanking',
           label: {
-            current: 'Mobile',
+            current: 'Standard Bank',
             legacy: [null],
-          },
+          }
         }
       ]
     },
     {
-      id: 'tNC1',
+      id: 'iEC1',
       label: {
-        current: 'NCell',
+        current: 'Express Credit',
         altFilename: null,
         legacy: [null]
       },
-      type: 'telecom',
-      groupLabel: 'Axiata',
+      type: 'internet',
+      groupLabel: 'Express Credit',
       hasOpCom: true,
-      opComLabel: 'NCell Nepal',
+      opComLabel: 'Express Credit',
       isPrevScored: false,
       firstIndex: null,
       urlPreviousYearResults: null,
       tabPrevYearsOutcome: null,
-      urlCurrentDataCollectionSheet: '10lSXNbuZgGaL1Pgj0I--sgo9B9_G5kt5efDfsQIsw70',
-      urlCurrentCompanyScoringSheet: null,
+      urlCurrentDataCollectionSheet: '1a6ritg1ks0hTHwj7fTrevHXehifls-kVs1EsM2_DF0M',
+      urlCurrentCompanyScoringSheet: '1juNsZvI9bTUou9UaXVaMglopHiL9Cj7NrD0Yq0Exiyo',
       numberOfServices: 1,
       services: [
         {
-          id: 'mbNC1',
-          type: 'mobile',
+          id: 'loEC1',
+          type: 'loans',
           label: {
-            current: 'Mobile',
-            legacy: [null],
-          },
-        }
-      ]
-    },
-    {
-      id: 'tNT1',
-      label: {
-        current: 'Nepal Telecom',
-        altFilename: null,
-        legacy: [null]
-      },
-      type: 'telecom',
-      groupLabel: 'Nepal Telecom',
-      hasOpCom: true,
-      opComLabel: 'Nepal Telecom',
-      isPrevScored: false,
-      firstIndex: null,
-      urlPreviousYearResults: null,
-      tabPrevYearsOutcome: null,
-      urlCurrentDataCollectionSheet: "1fR9JV7gPWguHorZ4rT0jximZBC0KYDPiF_9RaW-_EWA",
-      urlCurrentCompanyScoringSheet: null,
-      numberOfServices: 2,
-      services: [
-        {
-          id: 'mbNT1',
-          type: 'mobile',
-          label: {
-            current: 'Mobile',
-            legacy: [null],
-          }
-        },
-        {
-          id: 'bbNT1',
-          type: 'broadband',
-          label: {
-            current: 'Fixed-line broadband',
-            legacy: [null],
-          }
-        }
-      ]
-    },
-    {
-      id: 'tDH1',
-      label: {
-        current: 'Dhiraagu',
-        altFilename: null,
-        legacy: [null]
-      },
-      type: 'telecom',
-      groupLabel: 'Dhiraagu',
-      hasOpCom: true,
-      opComLabel: 'Dhiraagu',
-      isPrevScored: false,
-      firstIndex: null,
-      urlPreviousYearResults: null,
-      tabPrevYearsOutcome: null,
-      urlCurrentDataCollectionSheet: '1AOZs2nMmUx4uPWqKM1nv3UsscIgwk7noj01fp3pHSr0',
-      urlCurrentCompanyScoringSheet: null,
-      numberOfServices: 2,
-      services: [
-        {
-          id: 'mbDH1',
-          type: 'mobile',
-          label: {
-            current: 'Mobile',
-            legacy: [null],
-          }
-        },
-        {
-          id: 'bbDH1',
-          type: 'broadband',
-          label: {
-            current: 'Fixed-line broadband',
-            legacy: [null],
-          }
-        }
-      ]
-    },
-    {
-      id: 'tOM1',
-      label: {
-        current: 'Ooredoo',
-        altFilename: null,
-        legacy: [null]
-      },
-      type: 'telecom',
-      groupLabel: 'Ooredoo',
-      hasOpCom: true,
-      opComLabel: 'Ooredoo Maldives',
-      isPrevScored: false,
-      firstIndex: null,
-      urlPreviousYearResults: null,
-      tabPrevYearsOutcome: null,
-      urlCurrentDataCollectionSheet: '1Bl18lyNbqHVZfLS4PQjJYGW5nY7jAZrAJA3R8eeZefI',
-      urlCurrentCompanyScoringSheet: null,
-      numberOfServices: 2,
-      services: [
-        {
-          id: 'mbOM1',
-          type: 'mobile',
-          label: {
-            current: 'Mobile',
-            legacy: [null],
-          }
-        },
-        {
-          id: 'bbOM1',
-          type: 'broadband',
-          label: {
-            current: 'Fixed-line broadband',
-            legacy: [null],
-          }
-        }
-      ]
-    },
-    {
-      id: 'tTE1',
-      label: {
-        current: 'Telkomsel',
-        altFilename: null,
-        legacy: [null]
-      },
-      type: 'telecom',
-      groupLabel: 'Telkomsel',
-      hasOpCom: true,
-      opComLabel: 'Telkomsel',
-      isPrevScored: false,
-      firstIndex: null,
-      urlPreviousYearResults: null,
-      tabPrevYearsOutcome: null,
-      urlCurrentDataCollectionSheet: '18MM4_g3qCAA9SKqDOPspN3eQ49khuf68MsjWiElHoqM',
-      urlCurrentCompanyScoringSheet: null,
-      numberOfServices: 2,
-      services: [
-        {
-          id: 'mbTE1',
-          type: 'mobile',
-          label: {
-            current: 'Mobile',
-            legacy: [null],
-          }
-        },
-        {
-          id: 'bbTE1',
-          type: 'broadband',
-          label: {
-            current: 'Fixed-line broadband',
-            legacy: [null],
-          }
-        }
-      ]
-    },
-    {
-      id: 'tXA1',
-      label: {
-        current: 'XL Axiata',
-        altFilename: null,
-        legacy: [null]
-      },
-      type: 'telecom',
-      groupLabel: 'Axiata',
-      hasOpCom: true,
-      opComLabel: 'XL Axiata',
-      isPrevScored: false,
-      firstIndex: null,
-      urlPreviousYearResults: null,
-      tabPrevYearsOutcome: null,
-      urlCurrentDataCollectionSheet: '1otHCtrnlT8B_nhf-02YXgr-G0QYvDHMmDRdIk58TUeI',
-      urlCurrentCompanyScoringSheet: null,
-      numberOfServices: 2,
-      services: [
-        {
-          id: 'mbXA1',
-          type: 'mobile',
-          label: {
-            current: 'Mobile',
-            legacy: [null],
-          }
-        },
-        {
-          id: 'bbXA1',
-          type: 'broadband',
-          label: {
-            current: 'Fixed-line broadband',
-            legacy: [null],
-          }
-        }
-      ]
-    },
-    {
-      id: 'tIO1',
-      label: {
-        current: 'Indosat Ooredoo',
-        altFilename: null,
-        legacy: [null]
-      },
-      type: 'telecom',
-      groupLabel: 'Ooredoo',
-      hasOpCom: true,
-      opComLabel: 'Indosat Ooredoo',
-      isPrevScored: false,
-      firstIndex: null,
-      urlPreviousYearResults: null,
-      tabPrevYearsOutcome: null,
-      urlCurrentDataCollectionSheet: '1awomRDSEJPR56nKydoC72IJK2m9SxR0WN2gY5yFaapA',
-      urlCurrentCompanyScoringSheet: null,
-      numberOfServices: 2,
-      services: [
-        {
-          id: 'mbIO1',
-          type: 'mobile',
-          label: {
-            current: 'Mobile',
-            legacy: [null],
-          }
-        },
-        {
-          id: 'bbIO1',
-          type: 'broadband',
-          label: {
-            current: 'Fixed-line broadband',
-            legacy: [null],
-          }
-        }
-      ]
-    },
-    {
-      id: 'tGR1',
-      label: {
-        current: 'Grameenphone',
-        altFilename: null,
-        legacy: [null]
-      },
-      type: 'telecom',
-      groupLabel: 'Telenor',
-      hasOpCom: true,
-      opComLabel: 'Grameenphone',
-      isPrevScored: false,
-      firstIndex: null,
-      urlPreviousYearResults: null,
-      tabPrevYearsOutcome: null,
-      urlCurrentDataCollectionSheet: '1DfKX7Jl_4f-NfwxMstdn3J6yeNaXq_UC7LChXcgmI9M',
-      urlCurrentCompanyScoringSheet: null,
-      numberOfServices: 1,
-      services: [
-        {
-          id: 'mbGR1',
-          type: 'mobile',
-          label: {
-            current: 'Mobile',
-            legacy: [null],
-          }
-        }
-      ]
-    },
-    {
-      id: 'tRO1',
-      label: {
-        current: 'Robi',
-        altFilename: null,
-        legacy: [null]
-      },
-      type: 'telecom',
-      groupLabel: 'Axiata',
-      hasOpCom: true,
-      opComLabel: 'Robi',
-      isPrevScored: false,
-      firstIndex: null,
-      urlPreviousYearResults: null,
-      tabPrevYearsOutcome: null,
-      urlCurrentDataCollectionSheet: '1CDa3YU8z3jsiUGZCBhSVLp76PbUDeHhct5cb-QHYUwM',
-      urlCurrentCompanyScoringSheet: null,
-      numberOfServices: 1,
-      services: [
-        {
-          id: 'mbRO1',
-          type: 'mobile',
-          label: {
-            current: 'Mobile',
-            legacy: [null],
-          }
-        }
-      ]
-    },
-    {
-      id: 'tSM1',
-      label: {
-        current: 'Smart',
-        altFilename: null,
-        legacy: [null]
-      },
-      type: 'telecom',
-      groupLabel: 'Axiata',
-      hasOpCom: true,
-      opComLabel: 'Smart',
-      isPrevScored: false,
-      firstIndex: null,
-      urlPreviousYearResults: null,
-      tabPrevYearsOutcome: null,
-      urlCurrentDataCollectionSheet: '19rHamo_Gnk-cmMjSOUAu_RDnqxAAfSBij8WvCntSBr8',
-      urlCurrentCompanyScoringSheet: null,
-      numberOfServices: 2,
-      services: [
-        {
-          id: 'mbSM1',
-          type: 'mobile',
-          label: {
-            current: 'Mobile',
-            legacy: [null],
-          }
-        },
-        {
-          id: 'bbSM1',
-          type: 'broadband',
-          label: {
-            current: 'Fixed-line broadband',
-            legacy: [null],
-          }
-        }
-      ]
-    },
-    {
-      id: 'tME1',
-      label: {
-        current: 'Metfone',
-        altFilename: null,
-        legacy: [null]
-      },
-      type: 'telecom',
-      groupLabel: 'Metfone',
-      hasOpCom: true,
-      opComLabel: 'Metfone',
-      isPrevScored: false,
-      firstIndex: null,
-      urlPreviousYearResults: null,
-      tabPrevYearsOutcome: null,
-      urlCurrentDataCollectionSheet: '1hVOatXoNjIR_R4G_ZE_omcTjSZwpp5kkRls9gThkARs',
-      urlCurrentCompanyScoringSheet: null,
-      numberOfServices: 2,
-      services: [
-        {
-          id: 'mbME1',
-          type: 'mobile',
-          label: {
-            current: 'Mobile',
-            legacy: [null],
-          }
-        },
-        {
-          id: 'bbME1',
-          type: 'broadband',
-          label: {
-            current: 'Fixed-line broadband',
+            current: 'Express Credit',
             legacy: [null],
           }
         }

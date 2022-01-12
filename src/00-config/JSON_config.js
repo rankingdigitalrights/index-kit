@@ -2,15 +2,15 @@
 let centralConfig = {
   indexPrefix: 'RDR21M',
   filenameSuffix: 'Dev',
-  rootFolderID: '14trMtOe_IWDCHoE91naBtgHHx4zZi5_6', // "2019 Back-end testing"
-  outputFolderName: '2021 Mini Index - EngageMedia', // ID: 1XQnXbzKT3msOMHUMKsWjvU4Zz26b7I08
-  controlSpreadsheetID: '1uEt_u2dd2cedrsL-qDeQ_5qgLQ0U9UADFckponLE3FQ', // 00_Pilot_Dashboard
+  rootFolderID: '1gwHLrcJn2jSA2vqEMLOFb4wCkwEvcOfa', // "2019 Back-end testing"
+  outputFolderName: '2021 Mini Index - Lesotho', // ID: 1XQnXbzKT3msOMHUMKsWjvU4Zz26b7I08
+  controlSpreadsheetID: '1lRvuzrnBDVQTcxqJ15eIQ55uOqlBeOVjSN8NoJPIcME', // 00_Pilot_Dashboard
   YearOnYear: false,
   freezeHead: false,
   serviceColWidth: 280,
   defaultDataColWidth: 100,
   // "firstScoringStep": 1 // regular index
-  scoringSteps: [1, 3],
+  scoringSteps: [1],
   aggregationParams: {
     // TBD
   },
@@ -34,7 +34,7 @@ let centralConfig = {
     researchNotesParams: {
       subStepNr: 1,
       firstStepNr: 1,
-      lastStepNr: 3,
+      lastStepNr: 1,
       sheetName: 'Researcher Comments',
       dataColWidth: 200,
       hasFullScores: false,
@@ -45,7 +45,7 @@ let centralConfig = {
     scoringParams: {
       subStepNr: 0,
       firstStepNr: 1,
-      lastStepNr: 3,
+      lastStepNr: 1,
       sheetName: 'Outcome',
       dataColWidth: 200,
       hasFullScores: true,
@@ -56,7 +56,7 @@ let centralConfig = {
     feedbackParams: {
       subStepNr: 0,
       firstStepNr: 1,
-      lastStepNr: 3,
+      lastStepNr: 1,
       sheetName: 'Prototype',
       dataColWidth: 200,
       hasFullScores: false,

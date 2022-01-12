@@ -94,6 +94,7 @@ function createSpreadsheetInput({
       doCollapseAll,
       includeRGuidanceLink,
       collapseRGuidance,
+      Config.scoringSteps,
       useIndicatorSubset
     )
 

@@ -377,10 +377,15 @@ function addEvaluationDropdown(
           stepCompType
         )
 
+        let cellValue = (
+          thisElement.excludedCompanies &&
+          thisElement.excludedCompanies.includes(CompanyObj.id)
+        ) ? 'N/A' : 'not selected'
+
         SS.setNamedRange(cellName, thisCell) // names cells
         thisCell.setDataValidation(rule) // creates dropdown list
         thisCell
-          .setValue('not selected') // sets default for drop down list
+          .setValue(cellValue) // sets default for drop down list
           .setFontWeight('bold') // bolds the answers
         activeCol += 1
       }
@@ -400,15 +405,16 @@ function addEvaluationDropdown(
           stepCompType
         )
 
+        let cellValue = (
+          CompanyObj.hasOpCom === false ||
+          (thisElement.excludedCompanies && thisElement.excludedCompanies.includes(CompanyObj.id))
+        ) ? 'N/A' : 'not selected'
+
         SS.setNamedRange(cellName, thisCell) // names cells
         thisCell
           .setDataValidation(rule) // creates dropdown list
           .setFontWeight('bold') // bolds the answers
-        if (CompanyObj.hasOpCom === false) {
-          thisCell.setValue('N/A') // if no OpCom, pre-select N/A
-        } else {
-          thisCell.setValue('not selected') // sets default for drop down list
-        }
+        thisCell.setValue(cellValue) // sets default for drop down list
 
         activeCol += 1
       }
@@ -431,10 +437,15 @@ function addEvaluationDropdown(
           stepCompType
         )
 
+        let cellValue = (
+          (thisElement.excludedCompanies && thisElement.excludedCompanies.includes(CompanyObj.id)) ||
+          (thisElement.excludedServices && thisElement.excludedServices.includes(CompanyObj.services[g].type))
+        ) ? 'N/A' : 'not selected'
+
         SS.setNamedRange(cellName, thisCell) // names cells
         thisCell
           .setDataValidation(rule) // creates dropdown list
-          .setValue('not selected') // sets default for drop down list
+          .setValue(cellValue) // sets default for drop down list
           .setFontWeight('bold') // bolds the answers
         activeCol += 1
       }

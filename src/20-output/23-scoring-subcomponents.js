@@ -145,7 +145,8 @@ function importElementBlock(
     tempCol += 1
 
     // for opCom + Indicator Subcomponents
-
+    
+    currentCell = sheet.getRange(activeRow, tempCol)
     if (companyHasOpCom) {
       // setting up formula that compares values
       compCellName = defineNamedRangeStringImport(
@@ -346,6 +347,7 @@ function addElementScores(
   for (let elemNr = 0; elemNr < Indicator.elements.length; elemNr++) {
     let tempCol = activeCol
     let currentCell = sheet.getRange(activeRow, tempCol)
+    let isReversed = Indicator.elements[elemNr].isReversedScoring
 
     // row label / first Column
     // skip first Column for subsequent steps
@@ -366,7 +368,7 @@ function addElementScores(
       // Logger.log("let up: " + up)
       let range = sheet.getRange(activeRow - up, tempCol)
       // currentCell.setValue(range.getA1Notation())
-      let elementScore = elementScoreFormula(range)
+      let elementScore = elementScoreFormula(range, isReversed)
       currentCell.setFormula(elementScore)
       currentCell.setNumberFormat('0.##')
 
@@ -394,7 +396,7 @@ function addElementScores(
 
         range = sheet.getRange(activeRow - up, tempCol)
         // currentCell.setValue(range.getA1Notation())
-        elementScore = elementScoreFormula(range)
+        elementScore = elementScoreFormula(range, isReversed)
         currentCell.setFormula(elementScore)
         currentCell.setNumberFormat('0.##')
         // cell name formula; output defined in 44_rangeNamingHelper.js
@@ -426,7 +428,7 @@ function addElementScores(
         range = sheet.getRange(activeRow - up, tempCol)
         // currentCell.setValue(range.getA1Notation())
         // let elementScore = '=LEN(' + range.getA1Notation() + ')'
-        elementScore = elementScoreFormula(range)
+        elementScore = elementScoreFormula(range, isReversed)
         currentCell.setFormula(elementScore)
         currentCell.setNumberFormat('0.##')
         // cell name formula; output defined in 44_rangeNamingHelper.js

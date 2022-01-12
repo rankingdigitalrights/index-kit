@@ -11,6 +11,10 @@ function defineNamedRangeStringImport(index, sheetModeID, step, indicatorElement
     return `${index}${sheetModeID}${step}${indicatorElement}${companyId}${service}${suffix}`;
 }
 
+function defineNamedRangeStringFromObj(paramsObj) {
+    return `${paramsObj.index}${paramsObj.mode}${paramsObj.step}${paramsObj.element}${paramsObj.company}${paramsObj.service}${paramsObj.suffix}`;
+}
+
 
 // --- // rangedName cleaner // --- //
 // (as named ranges are not removed with sheet.clear())

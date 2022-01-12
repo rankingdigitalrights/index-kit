@@ -10,6 +10,7 @@ function populateDCSheetByCategory(
   doCollapseAll,
   includeRGuidanceLink = false,
   collapseRGuidance = false,
+  scoringSteps,
   useIndicatorSubset = false
 ) {
   // for each indicator
@@ -88,11 +89,11 @@ function populateDCSheetByCategory(
 
     let dataStartRow = activeRow
 
-    let mainStepsLength = ResearchStepsObj.researchSteps.length
+    // let mainStepsLength = ResearchStepsObj.researchSteps.length
 
     // for each main step
-    for (let mainStepNr = 0; mainStepNr < mainStepsLength; mainStepNr++) {
-      let thisMainStep = ResearchStepsObj.researchSteps[mainStepNr]
+    for (const mainStepNr of scoringSteps) {
+      let thisMainStep = ResearchStepsObj.researchSteps[mainStepNr-1]
       let thisMainStepColor = thisMainStep.stepColor
       // setting up all the substeps for all the indicators
 
@@ -268,7 +269,7 @@ function populateDCSheetByCategory(
         endStep = activeRow
       } // --- // END Sub-Step-Wise Procedure // --- //
 
-      if (mainStepNr < mainStepsLength - 1) {
+      if (mainStepNr < scoringSteps[scoringSteps.length-1]) {
         sheet
           .getRange(activeRow, activeCol, 1, numberOfColumns)
           .setBorder(null, null, true, null, null, null, 'black', null)
