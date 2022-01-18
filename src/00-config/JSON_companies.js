@@ -9,140 +9,117 @@ let companiesVector = {
   indexType: 'RDR Mini',
   companies: [
     {
-      id: 'tEW1',
+      id: 'tOA1',
       label: {
-        current: 'Econet Wireless Global',
+        current: 'Orange CAR',
         altFilename: null,
         legacy: [null]
       },
       type: 'telecom',
-      groupLabel: 'Econet Wireless Global',
+      groupLabel: 'Orange',
       hasOpCom: true,
-      opComLabel: 'Econet Lesotho',
+      opComLabel: 'Orange CAR',
       isPrevScored: false,
       firstIndex: null,
       urlPreviousYearResults: null,
       tabPrevYearsOutcome: null,
-      urlCurrentDataCollectionSheet: '1GiX0HBTExAcHa-7rxpVwqjzzZ30Ss-jdiKAPKdzQdRo',
-      urlCurrentCompanyScoringSheet: '1J83A8ALV6pNUuJWoRUPWiJhNvG3WtcGUZOOkwGyzKkk',
-      numberOfServices: 3,
-      services: [
-        {
-          id: 'mbEW1',
-          type: 'mobile',
-          label: {
-            current: 'Mobile',
-            legacy: [null],
-          }
-        },
-        {
-          id: 'bbEW1',
-          type: 'broadband',
-          label: {
-            current: 'Fixed-line broadband',
-            legacy: [null],
-          }
-        },
-        {
-          id: 'mpEW1',
-          type: 'mobilePayments',
-          label: {
-            current: 'EcoCash',
-            legacy: [null],
-          }
-        }
-      ]
-    },
-    {
-      id: 'tVO1',
-      label: {
-        current: 'Vodacom Group Limited',
-        altFilename: null,
-        legacy: [null]
-      },
-      type: 'telecom',
-      groupLabel: 'Vodacom Group Limited',
-      hasOpCom: true,
-      opComLabel: 'Vodacom Lesotho',
-      isPrevScored: false,
-      firstIndex: null,
-      urlPreviousYearResults: null,
-      tabPrevYearsOutcome: null,
-      urlCurrentDataCollectionSheet: '1e922IcqtGj39MdVPxjH3F4CNouolfNyT40OAh2ceiuo',
-      urlCurrentCompanyScoringSheet: '1LU7iy2wcBcoJihwunRV8bcAYH-vhHTXUHg6vbJ6yxoM',
+      urlCurrentDataCollectionSheet: '1mOha8vYuSbrcCBew-yqFHTqPkAGy-6Rsq9cnPV4G8MU',
+      urlCurrentCompanyScoringSheet: '',
       numberOfServices: 2,
       services: [
         {
-          id: 'mbVO1',
+          id: 'mbOA1',
           type: 'mobile',
+          subtype: 'prepaid',
           label: {
-            current: 'Mobile',
-            legacy: [null]
+            current: 'Prepaid mobile',
+            legacy: [null],
           }
         },
         {
-          id: 'mpVO1',
-          type: 'mobilePayments',
+          id: 'mbOA2',
+          type: 'mobile',
+          subtype: 'postpaid',
           label: {
-            current: 'M-Pesa',
-            legacy: [null]
-          }
-        }
-      ]
-    },
-    {
-      id: 'iSB1',
-      label: {
-        current: 'Standard Bank Group',
-        altFilename: null,
-        legacy: [null]
-      },
-      type: 'internet',
-      groupLabel: 'Standard Bank Group',
-      hasOpCom: true,
-      opComLabel: 'Standard Bank',
-      isPrevScored: false,
-      firstIndex: null,
-      urlPreviousYearResults: null,
-      tabPrevYearsOutcome: null,
-      urlCurrentDataCollectionSheet: '1F0GsFExeaz4p9OrjqQX7yXYnDlvswon4Id-SLUZPbng',
-      urlCurrentCompanyScoringSheet: '1SP7ebcXugZ_n2guySyRBhb84Z2K-imWzbMYKmBoxWUw',
-      numberOfServices: 1,
-      services: [
-        {
-          id: 'baSB1',
-          type: 'eBanking',
-          label: {
-            current: 'Standard Bank',
+            current: 'Postpaid mobile',
             legacy: [null],
           }
         }
       ]
     },
     {
-      id: 'iEC1',
+      id: 'tOR1',
       label: {
-        current: 'Express Credit',
+        current: 'Orange DRC',
         altFilename: null,
         legacy: [null]
       },
-      type: 'internet',
-      groupLabel: 'Express Credit',
+      type: 'telecom',
+      groupLabel: 'Orange',
       hasOpCom: true,
-      opComLabel: 'Express Credit',
+      opComLabel: 'Orange DRC',
       isPrevScored: false,
       firstIndex: null,
       urlPreviousYearResults: null,
       tabPrevYearsOutcome: null,
-      urlCurrentDataCollectionSheet: '1a6ritg1ks0hTHwj7fTrevHXehifls-kVs1EsM2_DF0M',
-      urlCurrentCompanyScoringSheet: '1juNsZvI9bTUou9UaXVaMglopHiL9Cj7NrD0Yq0Exiyo',
-      numberOfServices: 1,
+      urlCurrentDataCollectionSheet: '1eZzWfC1Sp9MecL8VDSmdIjBxyRBC06Qz81zIphEFmSU',
+      urlCurrentCompanyScoringSheet: '',
+      numberOfServices: 2,
       services: [
         {
-          id: 'loEC1',
-          type: 'loans',
+          id: 'mbOR1',
+          type: 'mobile',
+          subtype: 'prepaid',
           label: {
-            current: 'Express Credit',
+            current: 'Prepaid mobile',
+            legacy: [null],
+          }
+        },
+        {
+          id: 'mbOR2',
+          type: 'mobile',
+          subtype: 'postpaid',
+          label: {
+            current: 'Postpaid mobile',
+            legacy: [null],
+          }
+        }
+      ]
+    },
+    {
+      id: 'tUN1',
+      label: {
+        current: 'Unitel',
+        altFilename: null,
+        legacy: [null]
+      },
+      type: 'telecom',
+      groupLabel: 'Unitel',
+      hasOpCom: true,
+      opComLabel: 'Unitel Angola',
+      isPrevScored: false,
+      firstIndex: null,
+      urlPreviousYearResults: null,
+      tabPrevYearsOutcome: null,
+      urlCurrentDataCollectionSheet: '1YCCgFWwPnuaZZquhg9_QD9A7YdARSwcXLQPmw_Rl5_4',
+      urlCurrentCompanyScoringSheet: '',
+      numberOfServices: 2,
+      services: [
+        {
+          id: 'mbUN1',
+          type: 'mobile',
+          subtype: 'prepaid',
+          label: {
+            current: 'Prepaid mobile',
+            legacy: [null],
+          }
+        },
+        {
+          id: 'mbUN2',
+          type: 'mobile',
+          subtype: 'postpaid',
+          label: {
+            current: 'Postpaid mobile',
             legacy: [null],
           }
         }

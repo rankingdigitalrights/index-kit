@@ -53,17 +53,20 @@ function initiateGlobalConfig() {
 
   controlSpreadsheetID = centralConfig.controlSpreadsheetID // 00_2019_Pilot_Dashboard
 
-  IndicatorsObj = subsetIndicatorsObject(indicatorsVector, ['G1', 'F1a', 'F2a', 'F5a', 'F6', 'F9', 'F10', 'F11', 'P1a', 'P2a', 'P3a', 'P10a', 'P11a'])
+  IndicatorsObj = subsetIndicatorsObject(
+    indicatorsVector,
+    ['G1', 'G2', 'G4a', 'G4b', 'G5', 'F1a', 'Fa3', 'F9', 'F10', 'F11', 'P1a', 'P3a', 'P3b', 'P4', 'P5', 'P6', 'P7', 'P8', 'P10a', 'P10b', 'P11a', 'P11b', 'P12', 'P15']
+  )
 }
 
 function mainScoringSheets() {
   initiateGlobalConfig()
-  outputFolderName = 'Index Kit Scores - Lesotho'
+  outputFolderName = 'Index Kit Scores - PIN'
   let mainSheetMode = 'Output'
   let useStepsSubset = false // true := use subset
   let useIndicatorSubset = false // true := use subset
 
-  let Companies = companiesVector.companies.slice(0, 1)
+  let Companies = companiesVector.companies.slice(1, 3)
   // .slice(0,1) // SLT Mobitel
 
   let fileID

@@ -2,9 +2,9 @@
 let centralConfig = {
   indexPrefix: 'RDR21M',
   filenameSuffix: 'Dev',
-  rootFolderID: '1gwHLrcJn2jSA2vqEMLOFb4wCkwEvcOfa', // "2019 Back-end testing"
-  outputFolderName: '2021 Mini Index - Lesotho', // ID: 1XQnXbzKT3msOMHUMKsWjvU4Zz26b7I08
-  controlSpreadsheetID: '1lRvuzrnBDVQTcxqJ15eIQ55uOqlBeOVjSN8NoJPIcME', // 00_Pilot_Dashboard
+  rootFolderID: '1AdahEGvwnos5YMXazgaxX7vlqPYJ1sF7', // "2019 Back-end testing"
+  outputFolderName: '2021 Mini Index - PIN', // ID: 1XQnXbzKT3msOMHUMKsWjvU4Zz26b7I08
+  controlSpreadsheetID: '1UzBtiN2qv_4dVWnxp4CIyw1iTt2uvPOSwbidTWF0OPE', // 00_Pilot_Dashboard
   YearOnYear: false,
   freezeHead: false,
   serviceColWidth: 280,
