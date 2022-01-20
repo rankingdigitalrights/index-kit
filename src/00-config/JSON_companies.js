@@ -24,7 +24,7 @@ let companiesVector = {
       urlPreviousYearResults: null,
       tabPrevYearsOutcome: null,
       urlCurrentDataCollectionSheet: '1mOha8vYuSbrcCBew-yqFHTqPkAGy-6Rsq9cnPV4G8MU',
-      urlCurrentCompanyScoringSheet: '',
+      urlCurrentCompanyScoringSheet: '1VL3zS8U9jMz9LzwAnJPz6kFuhpBZKwR6PhQVwoxPVUA',
       numberOfServices: 2,
       services: [
         {
@@ -63,7 +63,7 @@ let companiesVector = {
       urlPreviousYearResults: null,
       tabPrevYearsOutcome: null,
       urlCurrentDataCollectionSheet: '1eZzWfC1Sp9MecL8VDSmdIjBxyRBC06Qz81zIphEFmSU',
-      urlCurrentCompanyScoringSheet: '',
+      urlCurrentCompanyScoringSheet: '13RQTT6far3Pdto65Bbb7NvdL-DBuH5pnxgGhMN0lJZ0',
       numberOfServices: 2,
       services: [
         {
@@ -102,7 +102,7 @@ let companiesVector = {
       urlPreviousYearResults: null,
       tabPrevYearsOutcome: null,
       urlCurrentDataCollectionSheet: '1YCCgFWwPnuaZZquhg9_QD9A7YdARSwcXLQPmw_Rl5_4',
-      urlCurrentCompanyScoringSheet: '',
+      urlCurrentCompanyScoringSheet: '1Yy6P5TjZDOVHbtrhulNV0227wqPOY3RdL_bebAo83iU',
       numberOfServices: 2,
       services: [
         {

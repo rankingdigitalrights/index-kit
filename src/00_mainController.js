@@ -55,7 +55,7 @@ function initiateGlobalConfig() {
 
   IndicatorsObj = subsetIndicatorsObject(
     indicatorsVector,
-    ['G1', 'G2', 'G4a', 'G4b', 'G5', 'F1a', 'Fa3', 'F9', 'F10', 'F11', 'P1a', 'P3a', 'P3b', 'P4', 'P5', 'P6', 'P7', 'P8', 'P10a', 'P10b', 'P11a', 'P11b', 'P12', 'P15']
+    ['G1', 'G2', 'G4a', 'G4b', 'G5', 'F1a', 'F3a', 'F9', 'F10', 'F11', 'P1a', 'P3a', 'P3b', 'P4', 'P5', 'P6', 'P7', 'P8', 'P10a', 'P10b', 'P11a', 'P11b', 'P12', 'P15']
   )
 }
 
@@ -66,7 +66,7 @@ function mainScoringSheets() {
   let useStepsSubset = false // true := use subset
   let useIndicatorSubset = false // true := use subset
 
-  let Companies = companiesVector.companies.slice(1, 3)
+  let Companies = companiesVector.companies//.slice(1, 3)
   // .slice(0,1) // SLT Mobitel
 
   let fileID
@@ -88,10 +88,10 @@ function mainScoringSheets() {
 function mainSummarySheets() {
   initiateGlobalConfig()
 
-  let ss = SpreadsheetApp.openById("1QBNen9lAENvmLow7w1k1sHGITOOTCHHyOmvwXgRsuKQ")
+  let ss = SpreadsheetApp.openById("16DMz99-l_dyiRV7m_oTFjOPjYflNiP1CYknTsbVuRio")
   let tab = ss.getSheets()[0]
 
-  let indicatorLabels = ['G1', 'F1a', 'F2a', 'F5a', 'F6', 'F9', 'F10', 'F11', 'P1a', 'P2a', 'P3a', 'P10a', 'P11a']
+  let indicatorLabels = ['G1', 'G2', 'G4a', 'G4b', 'G5', 'F1a', 'F3a', 'F9', 'F10', 'F11', 'P1a', 'P3a', 'P3b', 'P4', 'P5', 'P6', 'P7', 'P8', 'P10a', 'P10b', 'P11a', 'P11b', 'P12', 'P15']
 
   let companies = companiesVector.companies
 
