@@ -63,7 +63,7 @@ function mainScoringSheets() {
   let useStepsSubset = false // true := use subset
   let useIndicatorSubset = false // true := use subset
 
-  let Companies = companiesVector.companies.slice(0, 15)
+  let Companies = companiesVector.companies.slice(0, 1)
   // .slice(0,1) // SLT Mobitel
 
   let fileID
@@ -79,5 +79,37 @@ function mainScoringSheets() {
     )
 
     addFileIDtoControl(mainSheetMode, Company.label.current, fileID, controlSpreadsheetID)
+  })
+}
+
+function mainSummarySheets() {
+  initiateGlobalConfig()
+
+  let ss = SpreadsheetApp.openById("1yRpJ0sKrqSlm_JMCvST5uwNTCwSwbZ6bd1aTWNIcl7s")
+  let tab = ss.getSheets()[0]
+
+  let indicatorLabels = ['F1a', 'F3a', 'F9', 'F10', 'P1a', 'P10a', 'P11a', 'P12']
+
+  let companies = companiesVector.companies
+
+  writeHeaderColumn(tab, 1, indicatorLabels, 'S01')
+  writeCompanySummaries(tab, 2, centralConfig.indexPrefix, companies, indicatorLabels)
+
+  tab.setFrozenColumns(1)
+  tab.setFrozenRows(2)
+}
+
+function mainInspectInputSheets() {
+  initiateGlobalConfig()
+  // IMPORTANT FLAG
+
+  let controlSpreadsheet = connectToSpreadsheetByID(controlSpreadsheetID)
+  let listSheetBroken = insertSheetIfNotExist(controlSpreadsheet, 'Input - Broken Refs', true)
+  // ListSheetBroken.clear()
+
+  let companies = companiesVector.companies
+
+  companies.forEach((company) => {
+      processCompanyHealth(listSheetBroken, company)
   })
 }
