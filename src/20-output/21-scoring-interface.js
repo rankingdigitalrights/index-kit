@@ -2,14 +2,13 @@
 // Single set := either Outcome OR Comments OR Company Feedback
 
 function addSetOfScoringSteps(
-  SS,
+  ss,
   sheetModeID,
-  Config,
-  IndicatorsObj,
-  ResearchStepsObj,
-  CompanyObj,
+  mainConfig,
+  indicatorsObj,
+  researchStepsObj,
+  companyObj,
   hasOpCom,
-  useIndicatorSubset,
   integrateOutputs,
   outputParams,
   isPilotMode
@@ -28,10 +27,10 @@ function addSetOfScoringSteps(
   // var to estimate max sheet width in terms of columns based on whether G has subcomponents. This is needed for formatting the whole sheet at end of script. More performant than using getLastCol() esp. when executed per Sheet (think 45 indicators)
   var globalNrOfComponents = 1
 
-  var numberOfColumns = (CompanyObj.numberOfServices + 2) * globalNrOfComponents + 1
+  var numberOfColumns = (companyObj.services.length + 2) * globalNrOfComponents + 1
 
   var firstScoringStep = determineFirstStep(outputParams)
-  var maxScoringStep = determineMaxStep(outputParams, ResearchStepsObj)
+  var maxScoringStep = determineMaxStep(outputParams, researchStepsObj)
 
   Logger.log('include Sources? ' + outputParams.includeSources)
 
@@ -42,37 +41,36 @@ function addSetOfScoringSteps(
   // For each Main Research Step
 
   Logger.log('Inserting Sheet ' + sheetName)
-  var Sheet = insertSheetIfNotExist(SS, sheetName, true)
-  if (Sheet === null) {
+  var sheet = insertSheetIfNotExist(ss, sheetName, true)
+  if (sheet === null) {
     Logger.log('BREAK: Sheet for ' + sheetName + ' already exists. Skipping.')
     return lastCol
   }
 
   for (let mainStepNr = firstScoringStep; mainStepNr < maxScoringStep; mainStepNr++) {
-    let thisMainStep = ResearchStepsObj.researchSteps[mainStepNr]
+    let thisMainStep = researchStepsObj.researchSteps[mainStepNr]
     Logger.log('--- Main Step : ' + thisMainStep.step + ' ---')
     // var subStepsLength = thisMainStep.substeps.length
 
     // setting up all the substeps for all the indicators
 
     lastCol = scoringSingleStep(
-      SS,
-      Sheet,
+      ss,
+      sheet,
       subStepNr,
       lastCol,
-      Config,
+      mainConfig,
       isPilotMode,
       hasFullScores,
-      IndicatorsObj,
+      indicatorsObj,
       sheetModeID,
       thisMainStep,
-      CompanyObj,
+      companyObj,
       numberOfColumns,
       hasOpCom,
       blocks,
       dataColWidth,
       integrateOutputs,
-      useIndicatorSubset,
       includeSources,
       includeNames,
       includeResults
@@ -83,8 +81,8 @@ function addSetOfScoringSteps(
 
   // apply layouting
 
-  var thisSheet = SS.getSheetByName(sheetName)
+  var thisSheet = ss.getSheetByName(sheetName)
   thisSheet.setFrozenColumns(1)
 
-  if (integrateOutputs) moveSheetifExists(SS, thisSheet, 1)
+  if (integrateOutputs) moveSheetifExists(ss, thisSheet, 1)
 }

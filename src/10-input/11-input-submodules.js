@@ -139,7 +139,6 @@ function addIndicatorGuidance(
 
 function addMainStepHeader(
   sheet,
-  currentClass,
   CompanyObj,
   activeRow,
   SS,
@@ -236,7 +235,7 @@ function addSubStepHeader(
   SS,
   currentStep,
   stepCNr,
-  currentClass,
+  mainConfig,
   companyNumberOfServices
 ) {
   activeRow = activeRow + 1
@@ -274,7 +273,7 @@ function addSubStepHeader(
 
       // cell name formula; output defined in 44_rangeNamingHelper.js
       cellName = defineNamedRangeStringImport(
-        indexPrefix,
+        mainConfig.indexPrefix,
         'DC',
         currentStep.subStepID,
         currentIndicator.labelShort,
@@ -291,7 +290,7 @@ function addSubStepHeader(
 
       // cell name formula; output defined in 44_rangeNamingHelper.js
       cellName = defineNamedRangeStringImport(
-        indexPrefix,
+        mainConfig.indexPrefix,
         'DC',
         currentStep.subStepID,
         currentIndicator.labelShort,
@@ -311,7 +310,7 @@ function addSubStepHeader(
       let g = serviceNr - 3 // helper for Services
 
       cellName = defineNamedRangeStringImport(
-        indexPrefix,
+        mainConfig.indexPrefix,
         'DC',
         currentStep.subStepID,
         currentIndicator.labelShort,
@@ -338,7 +337,7 @@ function addEvaluationDropdown(
   SS,
   currentStep,
   stepCNr,
-  currentClass,
+  mainConfig,
   companyNumberOfServices
 ) {
   let rule = SpreadsheetApp.newDataValidation().requireValueInList(currentStep.components[stepCNr].dropdown).build()
@@ -368,7 +367,7 @@ function addEvaluationDropdown(
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
         let cellName = defineNamedRangeStringImport(
-          indexPrefix,
+          mainConfig.indexPrefix,
           'DC',
           currentStep.subStepID,
           thisElement.labelShort,
@@ -396,7 +395,7 @@ function addEvaluationDropdown(
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
         let cellName = defineNamedRangeStringImport(
-          indexPrefix,
+          mainConfig.indexPrefix,
           'DC',
           currentStep.subStepID,
           thisElement.labelShort,
@@ -428,7 +427,7 @@ function addEvaluationDropdown(
         let g = serviceNr - 3 // helper for Services
 
         let cellName = defineNamedRangeStringImport(
-          indexPrefix,
+          mainConfig.indexPrefix,
           'DC',
           currentStep.subStepID,
           thisElement.labelShort,
@@ -466,7 +465,7 @@ function addComments(
   SS,
   currentStep,
   stepCNr,
-  currentClass,
+  mainConfig,
   companyNumberOfServices
 ) {
   let stepCompType = currentStep.components[stepCNr].id
@@ -496,7 +495,7 @@ function addComments(
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
         let cellName = defineNamedRangeStringImport(
-          indexPrefix,
+          mainConfig.indexPrefix,
           'DC',
           currentStep.subStepID,
           currentIndicator.elements[elemNr].labelShort,
@@ -515,7 +514,7 @@ function addComments(
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
         let cellName = defineNamedRangeStringImport(
-          indexPrefix,
+          mainConfig.indexPrefix,
           'DC',
           currentStep.subStepID,
           currentIndicator.elements[elemNr].labelShort,
@@ -537,7 +536,7 @@ function addComments(
         let g = serviceNr - 3 // helper for Services
 
         let cellName = defineNamedRangeStringImport(
-          indexPrefix,
+          mainConfig.indexPrefix,
           'DC',
           currentStep.subStepID,
           currentIndicator.elements[elemNr].labelShort,
@@ -566,7 +565,7 @@ function addBinaryEvaluation(
   SS,
   currentStep,
   stepCNr,
-  currentClass,
+  mainConfig,
   companyNumberOfServices
 ) {
   let rule = SpreadsheetApp.newDataValidation().requireValueInList(currentStep.components[stepCNr].dropdown).build()
@@ -592,7 +591,7 @@ function addBinaryEvaluation(
 
       // cell name formula; output defined in 44_rangeNamingHelper.js
       let cellName = defineNamedRangeStringImport(
-        indexPrefix,
+        mainConfig.indexPrefix,
         'DC',
         currentStep.subStepID,
         currentIndicator.labelShort,
@@ -615,7 +614,7 @@ function addBinaryEvaluation(
 
       // cell name formula; output defined in 44_rangeNamingHelper.js
       let cellName = defineNamedRangeStringImport(
-        indexPrefix,
+        mainConfig.indexPrefix,
         'DC',
         currentStep.subStepID,
         currentIndicator.labelShort,
@@ -641,7 +640,7 @@ function addBinaryEvaluation(
       let g = serviceNr - 3
 
       let cellName = defineNamedRangeStringImport(
-        indexPrefix,
+        mainConfig.indexPrefix,
         'DC',
         currentStep.subStepID,
         currentIndicator.labelShort,
@@ -671,7 +670,7 @@ function addComparisonYonY(
   activeRow,
   currentStep,
   stepCNr,
-  currentClass,
+  mainConfig,
   companyNumberOfServices
 ) {
   // sets up column with discription
@@ -697,7 +696,7 @@ function addComparisonYonY(
         let thisCell = sheet.getRange(activeRow + elemNr, activeCol)
 
         let compCellName = defineNamedRangeStringImport(
-          indexPrefix,
+          mainConfig.indexPrefix,
           'DC',
           currentStep.components[stepCNr].comparisonLabelShort,
           currentIndicator.elements[elemNr].labelShort,
@@ -736,7 +735,7 @@ function addComparisonYonY(
 
         // creating the name of cell it will be compared to
         let compCellName = defineNamedRangeStringImport(
-          indexPrefix,
+          mainConfig.indexPrefix,
           'DC',
           currentStep.components[stepCNr].comparisonLabelShort,
           currentIndicator.elements[elemNr].labelShort,
@@ -777,7 +776,7 @@ function addComparisonYonY(
         let g = serviceNr - 3
 
         let compCellName = defineNamedRangeStringImport(
-          indexPrefix,
+          mainConfig.indexPrefix,
           'DC',
           currentStep.components[stepCNr].comparisonLabelShort,
           currentIndicator.elements[elemNr].labelShort,
@@ -839,7 +838,7 @@ function addSources(
   SS,
   currentStep,
   stepCNr,
-  currentClass,
+  mainConfig,
   companyNumberOfServices
 ) {
   let activeCol = 1
@@ -863,7 +862,7 @@ function addSources(
 
       // cell name formula; output defined in 44_rangeNamingHelper.js
       let cellName = defineNamedRangeStringImport(
-        indexPrefix,
+        mainConfig.indexPrefix,
         'DC',
         currentStep.subStepID,
         currentIndicator.labelShort,
@@ -880,7 +879,7 @@ function addSources(
 
       // cell name formula; output defined in 44_rangeNamingHelper.js
       let cellName = defineNamedRangeStringImport(
-        indexPrefix,
+        mainConfig.indexPrefix,
         'DC',
         currentStep.subStepID,
         currentIndicator.labelShort,
@@ -899,7 +898,7 @@ function addSources(
 
       let g = serviceNr - 3 // helper for Services
       let cellName = defineNamedRangeStringImport(
-        indexPrefix,
+        mainConfig.indexPrefix,
         'DC',
         currentStep.subStepID,
         currentIndicator.labelShort,

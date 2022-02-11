@@ -7,7 +7,6 @@
 //"use strict"
 
 function defineNamedRangeStringImport(index, sheetModeID, step, indicatorElement, companyId, service, suffix="") {
-
     return `${index}${sheetModeID}${step}${indicatorElement}${companyId}${service}${suffix}`;
 }
 

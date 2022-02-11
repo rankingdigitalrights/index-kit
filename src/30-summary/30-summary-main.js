@@ -5,7 +5,7 @@ function getIndicatorRow(company, nrObj) {
     for (const sfx of sufixes) {
       nrObj.service = sfx
       let namedRange = defineNamedRangeStringFromObj(nrObj)
-      formulas.push(importRangeFormula(company.urlCurrentCompanyScoringSheet, namedRange))
+      formulas.push(importRangeFormula(company.data.scoring, namedRange))
     }
     return formulas
 }
@@ -24,9 +24,10 @@ function getCompanySummaryHeaders(company) {
     return [Array(services.length).fill(company.label.current), services]
 }
 
-function writeCompanySummaries(tab, startingCol, indPfx, companies, indicators) {
+function writeCompanySummaries(tab, startingCol, indPfx, companies, compData, indicators, step) {
     
     for (comp of companies) {
+        comp.data = compData[comp.id]
         let servicesCount = comp.services.length + 2
         let indicatorsCount = indicators.length
         let headerRange = tab.getRange(1, startingCol, 2, servicesCount)
@@ -35,7 +36,7 @@ function writeCompanySummaries(tab, startingCol, indPfx, companies, indicators) 
         let scoreFormulas = getCompanySummaryFormulas(comp, indicators, {
             index: indPfx,
             mode: 'SC',
-            step: 'S01',
+            step: step,
             element: '',
             company: comp.id,
             service: '',

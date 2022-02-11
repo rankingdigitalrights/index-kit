@@ -3,50 +3,51 @@
 
 // --------------- This is the Main Scoring Process Caller ---------------- //
 
-function createSpreadsheetOutput(useStepsSubset, useIndicatorSubset, thisCompany, filenamePrefix, filenameSuffix, mainSheetMode) {
+// function createSpreadsheetOutput(useIndicatorSubset, thisCompany, filenamePrefix, filenameSuffix, mainSheetMode) {
     // importing the JSON objects which contain the parameters
     // Refactored to fetching from Google Drive
+function createSpreadsheetOutput(mainFolder, mainConfig, indicators, researchStepsObj, comp) {
 
-    var Config = centralConfig
-    var CompanyObj = thisCompany // TODO this a JSON Obj now; adapt in scope
-    let indicators = IndicatorsObj
-    let researchStepsObj = researchStepsVector
+    let sheetModeID = "SC"
 
-    var sheetModeID = "SC"
+    let companyFilename = comp.data.name
 
-    var companyFilename = cleanCompanyName(CompanyObj)
+    let mainSheetMode = 'Output'
 
     Logger.log("--- --- START: main Scoring for " + companyFilename)
     Logger.log("--- --- START: creating " + mainSheetMode + " Spreadsheet for " + companyFilename)
 
-    var hasOpCom = CompanyObj.hasOpCom
+    let hasOpCom = comp.hasOpCom
     Logger.log(companyFilename + " opCom? - " + hasOpCom)
 
-    // define SS name
-    var spreadsheetName = spreadSheetFileName(filenamePrefix, mainSheetMode, companyFilename, filenameSuffix)
+    // TODO add them to mainConfig?
+    let filenamePrefix = 'Mini-Index'
+    let filenameSuffix = ''
 
-    // connect to Spreadsheet if it already exists (Danger!), otherwise create and return new file
-    var SS = connectToSpreadsheetByName(spreadsheetName, true)
-    var fileID = SS.getId()
+    // define SS name
+    let spreadsheetName = spreadSheetFileName(filenamePrefix, mainSheetMode, companyFilename, filenameSuffix)
+
+    let ss = createSpreadSheet(mainFolder, spreadsheetName)
+    let fileID = ss.getId()
 
     // creates Outcome  page
 
     // Scoring Scheme / Validation
-    var pointsSheet = insertPointValidationSheet(SS, "Points")
+    var pointsSheet = insertPointValidationSheet(ss, "Points")
 
     // --- // Main Procedure // --- //
 
     var integrateOutputs = false
     var isPilotMode = false
-    var outputParams = Config.integrateOutputsArray.scoringParams
+    var outputParams = mainConfig.scoringParams
 
-    addSetOfScoringSteps(SS, sheetModeID, Config, indicators, researchStepsObj, CompanyObj, hasOpCom, useIndicatorSubset, integrateOutputs, outputParams, isPilotMode)
+    addSetOfScoringSteps(ss, sheetModeID, mainConfig, indicators, researchStepsObj, comp, hasOpCom, integrateOutputs, outputParams, isPilotMode)
 
-    moveHideSheetifExists(SS, pointsSheet, 1)
+    moveHideSheetifExists(ss, pointsSheet, 1)
 
     // clean up // 
     // if empty Sheet exists, delete
-    removeEmptySheet(SS)
+    removeEmptySheet(ss)
 
     Logger.log("--- --- END: main Scoring for " + companyFilename)
 

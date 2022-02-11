@@ -1,17 +1,15 @@
 //"use strict"
 function populateDCSheetByCategory(
-  SS,
+  ss,
   thisIndCat,
-  CompanyObj,
-  ResearchStepsObj,
+  companyObj,
+  researchStepsObj,
   companyNumberOfServices,
   serviceColWidth,
   hasOpCom,
   doCollapseAll,
-  includeRGuidanceLink = false,
-  collapseRGuidance = false,
-  scoringSteps,
-  useIndicatorSubset = false
+  mainConfig,
+  scoringSteps
 ) {
   // for each indicator
   // - create a new Sheet
@@ -31,7 +29,7 @@ function populateDCSheetByCategory(
     let thisIndScoringScope = thisInd.scoringScope
     Logger.log('Scoring Scope: ' + thisInd.labelShort + ' ' + thisIndScoringScope)
 
-    let sheet = insertSheetIfNotExist(SS, thisInd.labelShort, false)
+    let sheet = insertSheetIfNotExist(ss, thisInd.labelShort, false)
 
     if (sheet === null) {
       continue
@@ -81,8 +79,8 @@ function populateDCSheetByCategory(
       numberOfColumns,
       bridgeCompColumnsNr,
       companyNumberOfServices,
-      includeRGuidanceLink,
-      collapseRGuidance
+      mainConfig.includeRGuidanceLink,
+      mainConfig.collapseRGuidance
     )
 
     // --- // Begin Main Step-Wise Procedure // --- //
@@ -93,7 +91,7 @@ function populateDCSheetByCategory(
 
     // for each main step
     for (const mainStepNr of scoringSteps) {
-      let thisMainStep = ResearchStepsObj.researchSteps[mainStepNr-1]
+      let thisMainStep = researchStepsObj.researchSteps[mainStepNr-1]
       let thisMainStepColor = thisMainStep.stepColor
       // setting up all the substeps for all the indicators
 
@@ -102,10 +100,9 @@ function populateDCSheetByCategory(
 
       activeRow = addMainStepHeader(
         sheet,
-        thisIndCat,
-        CompanyObj,
+        companyObj,
         activeRow,
-        SS,
+        ss,
         companyNumberOfServices,
         thisMainStep.step,
         thisMainStepColor
@@ -141,12 +138,12 @@ function populateDCSheetByCategory(
               activeRow = addSubStepHeader(
                 sheet,
                 thisInd,
-                CompanyObj,
+                companyObj,
                 activeRow,
-                SS,
+                ss,
                 currentStep,
                 stepCNr,
-                thisIndCat,
+                mainConfig,
                 companyNumberOfServices
               )
               break
@@ -155,12 +152,12 @@ function populateDCSheetByCategory(
               activeRow = addEvaluationDropdown(
                 sheet,
                 thisInd,
-                CompanyObj,
+                companyObj,
                 activeRow,
-                SS,
+                ss,
                 currentStep,
                 stepCNr,
-                thisIndCat,
+                mainConfig,
                 companyNumberOfServices
               )
               break
@@ -169,12 +166,12 @@ function populateDCSheetByCategory(
               activeRow = addBinaryEvaluation(
                 sheet,
                 thisInd,
-                CompanyObj,
+                companyObj,
                 activeRow,
-                SS,
+                ss,
                 currentStep,
                 stepCNr,
-                thisIndCat,
+                mainConfig,
                 companyNumberOfServices
               )
               break
@@ -183,12 +180,12 @@ function populateDCSheetByCategory(
               activeRow = addComments(
                 sheet,
                 thisInd,
-                CompanyObj,
+                companyObj,
                 activeRow,
-                SS,
+                ss,
                 currentStep,
                 stepCNr,
-                thisIndCat,
+                mainConfig,
                 companyNumberOfServices
               )
               break
@@ -197,12 +194,12 @@ function populateDCSheetByCategory(
               activeRow = addSources(
                 sheet,
                 thisInd,
-                CompanyObj,
+                companyObj,
                 activeRow,
-                SS,
+                ss,
                 currentStep,
                 stepCNr,
-                thisIndCat,
+                mainConfig,
                 companyNumberOfServices
               )
               break
@@ -215,11 +212,11 @@ function populateDCSheetByCategory(
               activeRow = addComparisonYonY(
                 sheet,
                 thisInd,
-                CompanyObj,
+                companyObj,
                 activeRow,
                 currentStep,
                 stepCNr,
-                thisIndCat,
+                mainConfig,
                 companyNumberOfServices
               )
               break
@@ -243,16 +240,16 @@ function populateDCSheetByCategory(
 
         // cell name formula; output defined in 44_rangeNamingHelper.js
         let stepNamedRange = defineNamedRangeStringImport(
-          indexPrefix,
+          mainConfig.indexPrefix,
           'DC',
           currentStep.subStepID,
           thisIndCat.indicators[i].labelShort,
-          CompanyObj.id,
+          companyObj.id,
           '',
           'Step'
         )
 
-        SS.setNamedRange(stepNamedRange, range) // names an entire step
+        ss.setNamedRange(stepNamedRange, range) // names an entire step
 
         // GROUPING for substep
         let substepRange = range.shiftRowGroupDepth(1)

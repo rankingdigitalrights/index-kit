@@ -5,18 +5,24 @@
 //"use strict"
 
 // eslint-disable-next-line no-unused-vars
-function createSpreadsheetInput({
-  useIndicatorSubset = false,
-  Company,
-  filenamePrefix,
-  filenameSuffix,
-  mainSheetMode = 'Input',
-}) {
+// function createSpreadsheetInput({
+//   useIndicatorSubset = false,
+//   Company,
+//   filenamePrefix,
+//   filenameSuffix,
+//   mainSheetMode = 'Input',
+// }) {
+
+function createSpreadsheetInput(mainFolder, mainConfig, indicatorsObj, researchSteps, c) {
+
   Logger.log('--- // --- begin main data collection --- // ---')
 
   let sourcesTabName = 'Sources'
 
-  let companyShortName = cleanCompanyName(Company)
+  let companyShortName = cleanCompanyName(c)
+  c.name = companyShortName
+
+  let mainSheetMode = 'Input'
 
   Logger.log('--- // --- creating ' + mainSheetMode + ' Spreadsheet for ' + companyShortName + ' --- // ---')
 
@@ -24,78 +30,61 @@ function createSpreadsheetInput({
   // Refactored to fetching from Google Drive
 
   // json objects
-  let Config = centralConfig // let Config = importLocalJSON("Config")
-  let Indicators = IndicatorsObj
-  let ResearchStepsObj = researchStepsVector
+  // let Config = centralConfig // let Config = importLocalJSON("Config")
+  // let Indicators = IndicatorsObj
+  // let ResearchStepsObj = researchStepsVector
 
   // config information
-  let serviceColWidth = Config.serviceColWidth
-  let doCollapseAll = Config.collapseAllGroups
-  let integrateOutputs = Config.integrateOutputs
-  let importedOutcomeTabName = Config.prevYearOutcomeTab
-  let includeRGuidanceLink = Config.includeRGuidanceLink
-  let collapseRGuidance = Config.collapseRGuidance
+  let serviceColWidth = mainConfig.serviceColWidth
+  let doCollapseAll = mainConfig.collapseAllGroups
+  let scoringSteps = mainConfig.scoringSteps
+
+  // TODO add them to mainConfig?
+  let filenamePrefix = 'Mini-Index'
+  let filenameSuffix = ''
 
   // connect to existing spreadsheet or creat a blank spreadsheet
   let spreadsheetName = spreadSheetFileName(filenamePrefix, mainSheetMode, companyShortName, filenameSuffix)
 
-  let SS = connectToSpreadsheetByName(spreadsheetName, true)
+  let ss = createSpreadSheet(mainFolder, spreadsheetName)
 
-  let fileID = SS.getId()
+  let fileID = ss.getId()
   Logger.log('SS ID: ' + fileID)
-  // --- // add previous year's outcome sheet // --- //
 
-  // Formula for importing previous year's outcome
-  let externalFormula =
-    '=IMPORTRANGE("' + Config.prevIndexSSID + '","' + Company.tabPrevYearsOutcome + '!' + 'A:Z' + '")'
-
-  let newSheet
-
-  // if set in Config, import previous Index Outcome
-  if (Config.YearOnYear) {
-    newSheet = insertSheetIfNotExist(SS, importedOutcomeTabName, false)
-    if (newSheet !== null) {
-      fillPrevOutcomeSheet(newSheet, importedOutcomeTabName, externalFormula)
-    }
-  }
+  // TODO implement prevYear tab
 
   // --- // creates sources page // --- //
 
-  newSheet = insertSheetIfNotExist(SS, sourcesTabName, false)
+  newSheet = insertSheetIfNotExist(ss, sourcesTabName, false)
   if (newSheet !== null) {
     fillSourceSheet(newSheet)
   }
 
   // if scoring sheet is integrated into DC, create Points sheet
 
-  let hasOpCom = Company.hasOpCom
-
-  // fetch number of Services once
-  let companyNumberOfServices = Company.services.length
+  let hasOpCom = c.hasOpCom
 
   // --- // MAIN TASK // --- //
   // for each Indicator Class do
   let currentCat
 
-  for (let i = 0; i < Indicators.indicatorCategories.length; i++) {
-    currentCat = Indicators.indicatorCategories[i]
+  for (let i = 0; i < indicatorsObj.indicatorCategories.length; i++) {
+    currentCat = indicatorsObj.indicatorCategories[i]
 
     Logger.log('Starting ' + currentCat.labelLong)
-    Logger.log('Passing over ' + ResearchStepsObj.researchSteps.length + ' Steps')
+    Logger.log('Passing over ' + researchSteps.researchSteps.length + ' Steps')
 
     populateDCSheetByCategory(
-      SS,
+      ss,
       currentCat,
-      Company,
-      ResearchStepsObj,
-      companyNumberOfServices,
+      c,
+      researchSteps,
+      c.services.length,
       serviceColWidth,
       hasOpCom,
       doCollapseAll,
-      includeRGuidanceLink,
-      collapseRGuidance,
-      Config.scoringSteps,
-      useIndicatorSubset
+      mainConfig,
+      scoringSteps
     )
 
     Logger.log('Completed ' + currentCat.labelLong)
@@ -105,7 +94,7 @@ function createSpreadsheetInput({
 
   // clean up //
   // if empty Sheet exists, delete
-  removeEmptySheet(SS)
+  removeEmptySheet(ss)
 
   Logger.log(mainSheetMode + ' Spreadsheet created for ' + companyShortName)
   return fileID
