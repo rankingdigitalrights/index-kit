@@ -1,7 +1,3 @@
-function getMainFolder() {
-    return DriveApp.getFolderById('1Nwkb_7ikDYd1MfUsx-_35c8BBe4dxva2')
-}
-
 function retrieveCentralConfig(rootFolder) {
     let fileIterator = rootFolder.getFilesByName('config.json')
     if (!fileIterator.hasNext()) {

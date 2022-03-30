@@ -1,22 +1,7 @@
-/* this function creates input sheets for specified companies in the designated
- output folder by calling createSpreadsheetInput() and adds the sheets to the control sheet by calling addFileIDtoControl()*/
-
-//"use strict"
-
-// function initiateGlobalConfig() {
-//   indexPrefix = centralConfig.indexPrefix
-//   filenamePrefix = '2021 Mini Index -'
-//   filenameSuffix = 'Dev' // Dev, "", Debug, QC
-//   rootFolderID = centralConfig.rootFolderID // "2019 Back-End Dev"
-//   outputFolderName = centralConfig.outputFolderName // '2021 Mini Index'
-
-//   controlSpreadsheetID = centralConfig.controlSpreadsheetID // 00_2019_Pilot_Dashboard
-
-//   IndicatorsObj = subsetIndicatorsObject(
-//     indicatorsVector,
-//     ['G1', 'G2', 'G4a', 'G4b', 'G5', 'F1a', 'F3a', 'F9', 'F10', 'F11', 'P1a', 'P3a', 'P3b', 'P4', 'P5', 'P6', 'P7', 'P8', 'P10a', 'P10b', 'P11a', 'P11b', 'P12', 'P15']
-//   )
-// }
+// Change here the folder ID
+function getMainFolder() {
+  return DriveApp.getFolderById('1Nwkb_7ikDYd1MfUsx-_35c8BBe4dxva2')
+}
 
 function mainInputSheets() {
   let mainFolder = getMainFolder()
